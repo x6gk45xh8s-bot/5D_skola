@@ -474,6 +474,29 @@
     letter-spacing: 0.5px;
     font-family: 'Courier New', monospace;
   }
+
+  /* ===== MIC / PRONUNCIATION CHECK ===== */
+  .mic-section { text-align: center; margin: 14px 0 10px; }
+  .mic-btn {
+    background: linear-gradient(135deg, #fd79a8, #e84393);
+    color: white; border: none; border-radius: 40px;
+    padding: 11px 26px; font-size: 15px; font-weight: 800;
+    font-family: 'Nunito', sans-serif; cursor: pointer;
+    box-shadow: 0 5px 0 #b5006a, 0 6px 16px rgba(232,67,147,0.35);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .mic-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #b5006a, 0 10px 22px rgba(232,67,147,0.45); }
+  .mic-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b5006a; }
+  .mic-btn:disabled { opacity: 0.7; cursor: wait; }
+  .mic-btn.listening {
+    background: linear-gradient(135deg, #ff6b6b, #ee0979);
+    animation: mic-pulse 1s ease infinite;
+  }
+  @keyframes mic-pulse {
+    0%,100% { box-shadow: 0 5px 0 #a00, 0 0 0 0 rgba(255,107,107,0.5); }
+    50%      { box-shadow: 0 5px 0 #a00, 0 0 0 14px rgba(255,107,107,0); }
+  }
+  .mic-result { margin-top: 10px; font-size: 15px; font-weight: 800; min-height: 24px; }
 </style>
 </head>
 <body>
@@ -803,6 +826,9 @@ function getStars(unitId, lessonIdx){ return parseInt(localStorage.getItem(`star
 function starsHtml(n){ return '⭐'.repeat(n)+'☆'.repeat(3-n); }
 
 // ===== STATE =====
+const IS_CHROME = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+// Feature flags — set to true to re-enable
+const FEATURES = { pronunciation: false };
 let curLesson=null, curUnitId=null, curStarKey=null, curMode=null, curQ=0, score=0, questions=[], fcIdx=0, fcFlipped=false;
 let totalScore = parseInt(localStorage.getItem('totalScore')||0);
 let streak = parseInt(localStorage.getItem('streak')||0);
@@ -977,12 +1003,16 @@ function renderFC(){
       <div class="fc" id="fc-card" onclick="flipFC()">
         <div class="fc-emoji">${w.emoji}</div>
         <div class="fc-en">${w.en} <button class="speak-btn" onclick="event.stopPropagation();speak('${esc(w.en)}')">🔊</button></div>
-        ${w.ph ? `<div class="fc-ph">[ ${w.ph} ]</div>` : ''}
+        ${FEATURES.pronunciation && w.ph ? `<div class="fc-ph">[ ${w.ph} ]</div>` : ''}
         <div class="fc-cs" id="fc-cs" style="display:none">${w.cs}</div>
         ${w.ex?`<div class="fc-ex" id="fc-ex" style="display:none">"${w.ex}" <button class="speak-btn" onclick="event.stopPropagation();speak('${esc(w.ex)}')">🔊</button></div>`:''}
         <div class="fc-tip" id="fc-tip">👆 Tap to see Czech</div>
       </div>
     </div>
+    ${IS_CHROME && FEATURES.pronunciation ? `<div class="mic-section">
+      <button class="mic-btn" id="mic-btn" onclick="checkPronunciation('${esc(w.en)}')">🎤 Say it!</button>
+      <div id="mic-result" class="mic-result"></div>
+    </div>` : ''}
     <div class="fc-nav">
       <button class="fc-nav-btn" onclick="fcIdx=Math.max(0,fcIdx-1);fcFlipped=false;renderFC()">← Prev</button>
       <button class="fc-nav-btn" onclick="fcIdx++;fcFlipped=false;renderFC()">Next →</button>
@@ -1009,7 +1039,7 @@ function renderQuiz(){
       <span class="prog-label">${curQ+1}/${questions.length}</span>
     </div>
     <div class="q-text">${q.emoji} ${q.question} <button class="speak-btn" onclick="speak('${esc(q.question)}')">🔊</button></div>
-    ${q.ph ? `<div class="q-ph">[ ${q.ph} ]</div>` : ''}
+    ${FEATURES.pronunciation && q.ph ? `<div class="q-ph">[ ${q.ph} ]</div>` : ''}
     <div class="q-hint">What does this mean in Czech?</div>
     <div class="choices">
       ${q.choices.map(c=>`<button class="choice-btn" onclick="checkQ(this,'${esc(c)}','${esc(q.answer)}','quiz')">${c}</button>`).join('')}
@@ -1220,6 +1250,73 @@ function getVoiceStatus(){
   if(!englishVoice) loadEnglishVoice();
   if(englishVoice) return '🔊 Voice: ' + englishVoice.name;
   return '⚠️ No English voice found — check System Settings → Accessibility → Spoken Content';
+}
+
+// ===== PRONUNCIATION CHECK =====
+function checkPronunciation(targetEn) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('mic-btn');
+  const resultEl = document.getElementById('mic-result');
+  if(!SR){
+    resultEl.innerHTML = '<span style="color:var(--red)">⚠️ Not supported — use Chrome!</span>';
+    return;
+  }
+  const r = new SR();
+  r.lang = 'en-GB';
+  r.continuous = false;
+  r.interimResults = false;
+  r.maxAlternatives = 5;
+
+  btn.textContent = '🎤 Listening...';
+  btn.classList.add('listening');
+  btn.disabled = true;
+  resultEl.textContent = '';
+
+  r.onresult = function(e){
+    const transcripts = [];
+    for(let i=0;i<e.results[0].length;i++) transcripts.push(e.results[0][i].transcript.trim().toLowerCase());
+    const heard = transcripts[0];
+    if(pronunciationMatch(transcripts, targetEn)){
+      resultEl.innerHTML = '<span style="color:var(--green)">✅ Great pronunciation! 🌟</span>';
+      totalScore += 5;
+      localStorage.setItem('totalScore', totalScore);
+      updateBadges();
+    } else {
+      resultEl.innerHTML = `<span style="color:var(--red)">❌ Heard: "<em>${heard}</em>" — try again!</span>`;
+    }
+    btn.textContent = '🎤 Try again';
+    btn.classList.remove('listening');
+    btn.disabled = false;
+  };
+
+  r.onerror = function(e){
+    if(e.error==='no-speech') resultEl.innerHTML='<span style="color:var(--muted)">🔇 Nothing heard — speak louder!</span>';
+    else if(e.error==='not-allowed') resultEl.innerHTML='<span style="color:var(--red)">🚫 Mic blocked — click 🔒 in address bar to allow</span>';
+    else resultEl.innerHTML=`<span style="color:var(--muted)">⚠️ ${e.error}</span>`;
+    btn.textContent = '🎤 Say it!';
+    btn.classList.remove('listening');
+    btn.disabled = false;
+  };
+
+  r.onend = function(){
+    if(btn.disabled && btn.textContent==='🎤 Listening...'){
+      btn.textContent='🎤 Say it!';
+      btn.classList.remove('listening');
+      btn.disabled=false;
+    }
+  };
+
+  r.start();
+}
+
+function pronunciationMatch(transcripts, target){
+  const alts = target.toLowerCase().split(' / ').map(s=>s.trim().replace(/^(a |an |the )/,''));
+  return transcripts.some(heard=>{
+    const h = heard.replace(/^(a |an |the )/,'');
+    return alts.some(alt=>
+      h===alt || h.includes(alt) || (alt.includes(h) && h.length>=3)
+    );
+  });
 }
 
 // ===== INIT =====
