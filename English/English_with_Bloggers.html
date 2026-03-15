@@ -451,6 +451,29 @@
     width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
     text-align: center; line-height: 24px;
   }
+
+  /* ===== PRONUNCIATION GUIDE ===== */
+  .fc-ph {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6c5ce7;
+    background: rgba(162,155,254,0.18);
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+    font-family: 'Courier New', monospace;
+  }
+  .q-ph {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6c5ce7;
+    margin: -4px 0 12px;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+  }
 </style>
 </head>
 <body>
@@ -554,32 +577,32 @@ const UNITS = [
         },
         // exact word list from workbook p.72 — 2A column
         vocab:[
-          {en:"aunt",          cs:"teta",                          emoji:"👩",  ex:"This is my aunt."},
-          {en:"brother",       cs:"bratr",                         emoji:"🧑",  ex:"I haven't got a brother."},
-          {en:"children",      cs:"děti",                          emoji:"👦👧", ex:"They have got one daughter."},
-          {en:"cousin",        cs:"bratranec / sestřenice",         emoji:"🧒",  ex:"She is my cousin."},
-          {en:"daughter",      cs:"dcera",                         emoji:"👧",  ex:"They have got one daughter."},
-          {en:"father / daddy",cs:"otec / táta",                   emoji:"👨",  ex:"He is my father."},
-          {en:"granddaughter", cs:"vnučka",                        emoji:"👧",  ex:"She is their granddaughter."},
-          {en:"grandfather / grandpa", cs:"dědeček ❹ / děda",     emoji:"👴",  ex:"My grandpa loves the car."},
-          {en:"grandmother / grandma", cs:"babička ❺ / babi",     emoji:"👵",  ex:"I love my grandma!"},
-          {en:"grandparents",  cs:"prarodiče",                     emoji:"👴👵", ex:"My grandparents are really fun."},
-          {en:"grandson",      cs:"vnuk",                          emoji:"👦",  ex:"He is their grandson."},
-          {en:"husband",       cs:"manžel",                        emoji:"💍",  ex:"Her husband is kind."},
-          {en:"mother / mum",  cs:"matka / máma",                  emoji:"👩",  ex:"She is my mother."},
-          {en:"parents",       cs:"rodiče",                        emoji:"👫",  ex:"My parents are from America."},
-          {en:"sister",        cs:"sestra",                        emoji:"👧",  ex:"My sister is called Claire."},
-          {en:"son",           cs:"syn ❻",                        emoji:"👦",  ex:"He is their son."},
-          {en:"uncle",         cs:"strýc",                         emoji:"🧔",  ex:"My uncle is funny."},
-          {en:"wife",          cs:"manželka",                      emoji:"💍",  ex:"His wife is pretty."},
+          {en:"aunt",          cs:"teta",                          emoji:"👩",  ex:"This is my aunt.",           ph:"ant"},
+          {en:"brother",       cs:"bratr",                         emoji:"🧑",  ex:"I haven't got a brother.",   ph:"BRO·ther"},
+          {en:"children",      cs:"děti",                          emoji:"👦👧", ex:"They have got one daughter.", ph:"CHIL·dren"},
+          {en:"cousin",        cs:"bratranec / sestřenice",         emoji:"🧒",  ex:"She is my cousin.",          ph:"KUZ·in"},
+          {en:"daughter",      cs:"dcera",                         emoji:"👧",  ex:"They have got one daughter.", ph:"DAW·ter"},
+          {en:"father / daddy",cs:"otec / táta",                   emoji:"👨",  ex:"He is my father.",           ph:"FA·ther / DA·dy"},
+          {en:"granddaughter", cs:"vnučka",                        emoji:"👧",  ex:"She is their granddaughter.", ph:"GRAND·daw·ter"},
+          {en:"grandfather / grandpa", cs:"dědeček ❹ / děda",     emoji:"👴",  ex:"My grandpa loves the car.",  ph:"GRAND·fa·ther / GRAN·pa"},
+          {en:"grandmother / grandma", cs:"babička ❺ / babi",     emoji:"👵",  ex:"I love my grandma!",         ph:"GRAND·muh·ther / GRAN·ma"},
+          {en:"grandparents",  cs:"prarodiče",                     emoji:"👴👵", ex:"My grandparents are really fun.", ph:"GRAND·pair·ents"},
+          {en:"grandson",      cs:"vnuk",                          emoji:"👦",  ex:"He is their grandson.",      ph:"GRAN·sun"},
+          {en:"husband",       cs:"manžel",                        emoji:"💍",  ex:"Her husband is kind.",       ph:"HUZ·band"},
+          {en:"mother / mum",  cs:"matka / máma",                  emoji:"👩",  ex:"She is my mother.",          ph:"MUH·ther / mum"},
+          {en:"parents",       cs:"rodiče",                        emoji:"👫",  ex:"My parents are from America.", ph:"PAIR·ents"},
+          {en:"sister",        cs:"sestra",                        emoji:"👧",  ex:"My sister is called Claire.", ph:"SIS·ter"},
+          {en:"son",           cs:"syn ❻",                        emoji:"👦",  ex:"He is their son.",           ph:"sun"},
+          {en:"uncle",         cs:"strýc",                         emoji:"🧔",  ex:"My uncle is funny.",         ph:"UNG·kl"},
+          {en:"wife",          cs:"manželka",                      emoji:"💍",  ex:"His wife is pretty.",        ph:"wyfe"},
           // 2B extra family words from workbook p.72
-          {en:"divorced",      cs:"rozvedený/á",                   emoji:"📋",  ex:"They are divorced."},
-          {en:"half-brother",  cs:"nevlastní bratr (polorodý)",    emoji:"🧑",  ex:"He is my half-brother."},
-          {en:"half-sister",   cs:"nevlastní sestra (polorodá)",   emoji:"👧",  ex:"She is my half-sister."},
-          {en:"stepbrother",   cs:"nevlastní bratr (stejný otec/stejná matka)", emoji:"🧑", ex:"He is my stepbrother."},
-          {en:"stepfather",    cs:"nevlastní otec",                emoji:"👨",  ex:"He is my stepfather."},
-          {en:"stepmother",    cs:"nevlastní matka",               emoji:"👩",  ex:"She is my stepmother."},
-          {en:"stepsister",    cs:"nevlastní sestra",              emoji:"👧",  ex:"She is my stepsister."},
+          {en:"divorced",      cs:"rozvedený/á",                   emoji:"📋",  ex:"They are divorced.",         ph:"di·VORST"},
+          {en:"half-brother",  cs:"nevlastní bratr (polorodý)",    emoji:"🧑",  ex:"He is my half-brother.",    ph:"haf·BRO·ther"},
+          {en:"half-sister",   cs:"nevlastní sestra (polorodá)",   emoji:"👧",  ex:"She is my half-sister.",    ph:"haf·SIS·ter"},
+          {en:"stepbrother",   cs:"nevlastní bratr (stejný otec/stejná matka)", emoji:"🧑", ex:"He is my stepbrother.", ph:"STEP·bru·ther"},
+          {en:"stepfather",    cs:"nevlastní otec",                emoji:"👨",  ex:"He is my stepfather.",      ph:"STEP·fa·ther"},
+          {en:"stepmother",    cs:"nevlastní matka",               emoji:"👩",  ex:"She is my stepmother.",     ph:"STEP·muh·ther"},
+          {en:"stepsister",    cs:"nevlastní sestra",              emoji:"👧",  ex:"She is my stepsister.",     ph:"STEP·sis·ter"},
         ],
         fill:[
           {s:"This is my ___. She is my mum's sister.",   a:"aunt",      h:"teta"},
@@ -614,8 +637,8 @@ const UNITS = [
           {en:"No, he hasn't.",            cs:"Ne, nemá.",              emoji:"❌", ex:"Has he got a beard? No, he hasn't."},
           {en:"Yes, we have.",             cs:"Ano, máme.",             emoji:"✅", ex:"Have you got a big family? Yes, we have."},
           {en:"No, they haven't.",         cs:"Ne, nemají.",            emoji:"❌", ex:"Have they got cousins? No, they haven't."},
-          {en:"a big family",              cs:"velká rodina",           emoji:"👨‍👩‍👧‍👦", ex:"I have got a big family."},
-          {en:"an only child",             cs:"jedináček / jedináčka",  emoji:"🧒", ex:"She is an only child."},
+          {en:"a big family",              cs:"velká rodina",           emoji:"👨‍👩‍👧‍👦", ex:"I have got a big family.",    ph:"a·big·FAM·i·lee"},
+          {en:"an only child",             cs:"jedináček / jedináčka",  emoji:"🧒", ex:"She is an only child.",      ph:"an·OHN·lee·chyld"},
         ],
         fill:[
           {s:"___ you got a sister? Yes, I have.",        a:"Have",    h:"Have / Has"},
@@ -643,29 +666,29 @@ const UNITS = [
         // exact word list from workbook p.73 — 2C column
         vocab:[
           // Eyes
-          {en:"brown eyes",          cs:"hnědé oči",          emoji:"🟤", ex:"She has got brown eyes."},
-          {en:"blue eyes",           cs:"modré oči",          emoji:"💙", ex:"She has got blue eyes."},
-          {en:"green eyes",          cs:"zelené oči",         emoji:"💚", ex:"He has got green eyes."},
+          {en:"brown eyes",          cs:"hnědé oči",          emoji:"🟤", ex:"She has got brown eyes.",           ph:"brown·eyes"},
+          {en:"blue eyes",           cs:"modré oči",          emoji:"💙", ex:"She has got blue eyes.",            ph:"bloo·eyes"},
+          {en:"green eyes",          cs:"zelené oči",         emoji:"💚", ex:"He has got green eyes.",            ph:"green·eyes"},
           // Hair colour
-          {en:"blond hair",          cs:"blond vlasy",        emoji:"👱", ex:"She has got blond hair."},
-          {en:"brown hair",          cs:"hnědé vlasy",        emoji:"🟤", ex:"He has got short, brown hair."},
-          {en:"dark / black hair",   cs:"tmavé / černé vlasy",emoji:"🖤", ex:"My dad has got dark hair."},
-          {en:"grey hair",           cs:"šedivé vlasy",       emoji:"⚪", ex:"My grandfather has got grey hair."},
-          {en:"red hair",            cs:"zrzavé vlasy",       emoji:"🔴", ex:"Who has got red hair?"},
-          {en:"white hair",          cs:"bílé vlasy",         emoji:"🤍", ex:"She has got white hair."},
+          {en:"blond hair",          cs:"blond vlasy",        emoji:"👱", ex:"She has got blond hair.",           ph:"blond·hair"},
+          {en:"brown hair",          cs:"hnědé vlasy",        emoji:"🟤", ex:"He has got short, brown hair.",     ph:"brown·hair"},
+          {en:"dark / black hair",   cs:"tmavé / černé vlasy",emoji:"🖤", ex:"My dad has got dark hair.",         ph:"dark / blak·hair"},
+          {en:"grey hair",           cs:"šedivé vlasy",       emoji:"⚪", ex:"My grandfather has got grey hair.", ph:"gray·hair"},
+          {en:"red hair",            cs:"zrzavé vlasy",       emoji:"🔴", ex:"Who has got red hair?",             ph:"red·hair"},
+          {en:"white hair",          cs:"bílé vlasy",         emoji:"🤍", ex:"She has got white hair.",           ph:"wyte·hair"},
           // Hair length
-          {en:"long hair",           cs:"dlouhé vlasy",       emoji:"💇‍♀️", ex:"She has got long, blond hair."},
-          {en:"short hair",          cs:"krátké vlasy",       emoji:"💇",  ex:"He has got short hair."},
-          {en:"shoulder-length hair",cs:"vlasy na ramena (poloduohé)", emoji:"👱‍♀️", ex:"She has got shoulder-length hair."},
+          {en:"long hair",           cs:"dlouhé vlasy",       emoji:"💇‍♀️", ex:"She has got long, blond hair.",     ph:"long·hair"},
+          {en:"short hair",          cs:"krátké vlasy",       emoji:"💇",  ex:"He has got short hair.",            ph:"short·hair"},
+          {en:"shoulder-length hair",cs:"vlasy na ramena (poloduohé)", emoji:"👱‍♀️", ex:"She has got shoulder-length hair.", ph:"SHOL·der-length·hair"},
           // Hair type
-          {en:"curly hair",          cs:"kudrnaté vlasy",     emoji:"🌀", ex:"She has got long, curly hair."},
-          {en:"straight hair",       cs:"rovné vlasy",        emoji:"➡️", ex:"He has got straight, dark hair."},
-          {en:"wavy hair",           cs:"vlnité vlasy",       emoji:"🌊", ex:"My mum has got wavy hair."},
+          {en:"curly hair",          cs:"kudrnaté vlasy",     emoji:"🌀", ex:"She has got long, curly hair.",     ph:"KUR·lee·hair"},
+          {en:"straight hair",       cs:"rovné vlasy",        emoji:"➡️", ex:"He has got straight, dark hair.",   ph:"strayt·hair"},
+          {en:"wavy hair",           cs:"vlnité vlasy",       emoji:"🌊", ex:"My mum has got wavy hair.",         ph:"WAY·vee·hair"},
           // Details
-          {en:"a beard",             cs:"vous / knír",        emoji:"🧔", ex:"My dad has got a beard."},
-          {en:"glasses",             cs:"brýle",              emoji:"👓", ex:"He wears glasses."},
-          {en:"a moustache",         cs:"knír",               emoji:"🥸", ex:"He has got a moustache."},
-          {en:"a tattoo",            cs:"tetování",           emoji:"💪", ex:"She has got a tattoo."},
+          {en:"a beard",             cs:"vous / knír",        emoji:"🧔", ex:"My dad has got a beard.",           ph:"a·beerd"},
+          {en:"glasses",             cs:"brýle",              emoji:"👓", ex:"He wears glasses.",                 ph:"GLAS·iz"},
+          {en:"a moustache",         cs:"knír",               emoji:"🥸", ex:"He has got a moustache.",           ph:"a·muh·STASH"},
+          {en:"a tattoo",            cs:"tetování",           emoji:"💪", ex:"She has got a tattoo.",             ph:"a·ta·TOO"},
         ],
         fill:[
           {s:"She has got long, ___ hair.",                a:"curly",           h:"kudrnaté"},
@@ -696,27 +719,27 @@ const UNITS = [
         // exact adjectives from workbook p.73 — 2D column
         vocab:[
           // Figure
-          {en:"chubby",        cs:"buclatý/á / tlusťoučký",    emoji:"🤗", ex:"He is a bit chubby."},
-          {en:"fat",           cs:"tlustý/á",                  emoji:"😅", ex:"He is quite fat."},
-          {en:"medium-height", cs:"střední výšky",             emoji:"🧍", ex:"She is medium-height."},
-          {en:"slim",          cs:"štíhlý/á",                  emoji:"🧍", ex:"They are both slim."},
-          {en:"short",         cs:"malý/á (o výšce)",          emoji:"🧒", ex:"Mum is short and very thin."},
-          {en:"tall",          cs:"vysoký/á",                  emoji:"🏀", ex:"My dad is quite tall."},
-          {en:"thin",          cs:"hubený/á / tenký",          emoji:"🧍", ex:"She is short and very thin."},
+          {en:"chubby",        cs:"buclatý/á / tlusťoučký",    emoji:"🤗", ex:"He is a bit chubby.",        ph:"CHUB·ee"},
+          {en:"fat",           cs:"tlustý/á",                  emoji:"😅", ex:"He is quite fat.",           ph:"fat"},
+          {en:"medium-height", cs:"střední výšky",             emoji:"🧍", ex:"She is medium-height.",      ph:"MEE·dee·um·hyte"},
+          {en:"slim",          cs:"štíhlý/á",                  emoji:"🧍", ex:"They are both slim.",         ph:"slim"},
+          {en:"short",         cs:"malý/á (o výšce)",          emoji:"🧒", ex:"Mum is short and very thin.",  ph:"short"},
+          {en:"tall",          cs:"vysoký/á",                  emoji:"🏀", ex:"My dad is quite tall.",       ph:"tawl"},
+          {en:"thin",          cs:"hubený/á / tenký",          emoji:"🧍", ex:"She is short and very thin.",  ph:"thin"},
           // Other adjectives from workbook p.73
-          {en:"a bit",         cs:"trochu / poněkud",          emoji:"🔅", ex:"He is a bit chubby."},
-          {en:"beautiful",     cs:"krásná / hezká",            emoji:"😍", ex:"She is beautiful."},
-          {en:"intelligent",   cs:"chytrý/á / inteligentní",   emoji:"🧠", ex:"She is the most intelligent."},
-          {en:"quite",         cs:"docela",                    emoji:"👌", ex:"She is quite tall."},
-          {en:"the eldest of", cs:"nejstarší z",               emoji:"👴", ex:"He is the eldest of the family."},
-          {en:"the youngest of",cs:"nejmladší z",              emoji:"🧒", ex:"She is the youngest of four."},
+          {en:"a bit",         cs:"trochu / poněkud",          emoji:"🔅", ex:"He is a bit chubby.",         ph:"a·bit"},
+          {en:"beautiful",     cs:"krásná / hezká",            emoji:"😍", ex:"She is beautiful.",          ph:"BYOO·ti·ful"},
+          {en:"intelligent",   cs:"chytrý/á / inteligentní",   emoji:"🧠", ex:"She is the most intelligent.", ph:"in·TEL·i·jent"},
+          {en:"quite",         cs:"docela",                    emoji:"👌", ex:"She is quite tall.",          ph:"kwyte"},
+          {en:"the eldest of", cs:"nejstarší z",               emoji:"👴", ex:"He is the eldest of the family.", ph:"the·EL·dest·ov"},
+          {en:"the youngest of",cs:"nejmladší z",              emoji:"🧒", ex:"She is the youngest of four.",  ph:"the·YUNG·est·ov"},
           // Phrases from 2D
-          {en:"in her opinion",cs:"dle jejího názoru",         emoji:"💬", ex:"She is beautiful, in her opinion."},
-          {en:"bright",        cs:"zářivý/á / bystý/á",        emoji:"✨", ex:"She has got bright eyes."},
-          {en:"shy",           cs:"stydlivý/á",                emoji:"😳", ex:"She is quite shy."},
-          {en:"soft",          cs:"hebký/á / měkký",           emoji:"🌸", ex:"She has got soft hair."},
-          {en:"sweet",         cs:"milý/á / roztomilý/á / sladký", emoji:"🍬", ex:"She is very sweet."},
-          {en:"tímid",         cs:"nesmělý/á / bázlivý",       emoji:"🐭", ex:"She seems timid."},
+          {en:"in her opinion",cs:"dle jejího názoru",         emoji:"💬", ex:"She is beautiful, in her opinion.", ph:"in·her·uh·PIN·yun"},
+          {en:"bright",        cs:"zářivý/á / bystý/á",        emoji:"✨", ex:"She has got bright eyes.",    ph:"bryte"},
+          {en:"shy",           cs:"stydlivý/á",                emoji:"😳", ex:"She is quite shy.",           ph:"shy"},
+          {en:"soft",          cs:"hebký/á / měkký",           emoji:"🌸", ex:"She has got soft hair.",      ph:"soft"},
+          {en:"sweet",         cs:"milý/á / roztomilý/á / sladký", emoji:"🍬", ex:"She is very sweet.",      ph:"sweet"},
+          {en:"tímid",         cs:"nesmělý/á / bázlivý",       emoji:"🐭", ex:"She seems timid.",           ph:"TIM·id"},
         ],
         fill:[
           {s:"She is ___ and slim. Not short at all.",          a:"tall",        h:"vysoká"},
@@ -735,22 +758,22 @@ const UNITS = [
         color: 4,
         grammar: null,
         vocab:[
-          {en:"bilingual",       cs:"dvojjazyčný/á",            emoji:"🗣️", ex:"I am bilingual — Czech and English."},
-          {en:"hometown",        cs:"rodné město",              emoji:"🏠", ex:"Her hometown is a fantastic place."},
-          {en:"American",        cs:"Američan/ka / americký",   emoji:"🇺🇸", ex:"My mum is American."},
-          {en:"Czech",           cs:"Čech / česky / český",     emoji:"🇨🇿", ex:"My dad is Czech."},
-          {en:"fantastic",       cs:"fantastický/á",            emoji:"🌟", ex:"New York is a fantastic city."},
-          {en:"both",            cs:"oba / obě",                emoji:"2️⃣", ex:"They are both slim."},
-          {en:"really",          cs:"opravdu / skutečně",       emoji:"💯", ex:"My grandparents are really fun."},
-          {en:"sweetheart",      cs:"miláček",                  emoji:"❤️", ex:"Claire is the sweetheart of our family."},
-          {en:"lovely",          cs:"roztomilý/á / krásný/á",   emoji:"🌸", ex:"She has got lovely brown eyes."},
-          {en:"selfie",          cs:"selfie",                   emoji:"🤳", ex:"She sends me a selfie."},
-          {en:"send",            cs:"poslat / posílat",         emoji:"📨", ex:"She sends me messages."},
-          {en:"look young",      cs:"vypadat mladě",            emoji:"😊", ex:"My parents look very young."},
-          {en:"wear glasses",    cs:"nosit brýle",              emoji:"👓", ex:"Dad wears glasses."},
-          {en:"quite tall",      cs:"celkem vysoký/á",          emoji:"📏", ex:"Dad is quite tall."},
-          {en:"short red hair",  cs:"krátké zrzavé vlasy",      emoji:"🔴", ex:"She has got short red hair."},
-          {en:"shoulder-length white hair", cs:"bílé vlasy na ramena", emoji:"🤍", ex:"She has got shoulder-length white hair."},
+          {en:"bilingual",       cs:"dvojjazyčný/á",            emoji:"🗣️", ex:"I am bilingual — Czech and English.", ph:"by·LIN·gwul"},
+          {en:"hometown",        cs:"rodné město",              emoji:"🏠", ex:"Her hometown is a fantastic place.", ph:"HOME·town"},
+          {en:"American",        cs:"Američan/ka / americký",   emoji:"🇺🇸", ex:"My mum is American.",            ph:"uh·MER·uh·kun"},
+          {en:"Czech",           cs:"Čech / česky / český",     emoji:"🇨🇿", ex:"My dad is Czech.",               ph:"chek"},
+          {en:"fantastic",       cs:"fantastický/á",            emoji:"🌟", ex:"New York is a fantastic city.", ph:"fan·TAS·tik"},
+          {en:"both",            cs:"oba / obě",                emoji:"2️⃣", ex:"They are both slim.",            ph:"bohth"},
+          {en:"really",          cs:"opravdu / skutečně",       emoji:"💯", ex:"My grandparents are really fun.", ph:"REE·lee"},
+          {en:"sweetheart",      cs:"miláček",                  emoji:"❤️", ex:"Claire is the sweetheart of our family.", ph:"SWEET·hart"},
+          {en:"lovely",          cs:"roztomilý/á / krásný/á",   emoji:"🌸", ex:"She has got lovely brown eyes.",  ph:"LUV·lee"},
+          {en:"selfie",          cs:"selfie",                   emoji:"🤳", ex:"She sends me a selfie.",          ph:"SEL·fee"},
+          {en:"send",            cs:"poslat / posílat",         emoji:"📨", ex:"She sends me messages.",          ph:"send"},
+          {en:"look young",      cs:"vypadat mladě",            emoji:"😊", ex:"My parents look very young.",     ph:"look·yung"},
+          {en:"wear glasses",    cs:"nosit brýle",              emoji:"👓", ex:"Dad wears glasses.",              ph:"wair·GLAS·iz"},
+          {en:"quite tall",      cs:"celkem vysoký/á",          emoji:"📏", ex:"Dad is quite tall.",              ph:"kwyte·tawl"},
+          {en:"short red hair",  cs:"krátké zrzavé vlasy",      emoji:"🔴", ex:"She has got short red hair.",     ph:"short·red·hair"},
+          {en:"shoulder-length white hair", cs:"bílé vlasy na ramena", emoji:"🤍", ex:"She has got shoulder-length white hair.", ph:"SHOL·der-length·wyte·hair"},
         ],
         fill:[
           {s:"I am ___. I can speak Czech and English.",     a:"bilingual", h:"dvojjazyčný/á"},
@@ -913,7 +936,7 @@ function buildQuiz(){
   questions = shuffle(curLesson.vocab).slice(0,Math.min(10,curLesson.vocab.length)).map(item=>{
     const others = curLesson.vocab.filter(v=>v.en!==item.en);
     const wrong = shuffle(others).slice(0,3).map(v=>v.cs);
-    return {question:item.en, answer:item.cs, choices:shuffle([item.cs,...wrong]), emoji:item.emoji, ex:item.ex};
+    return {question:item.en, answer:item.cs, choices:shuffle([item.cs,...wrong]), emoji:item.emoji, ex:item.ex, ph:item.ph};
   });
 }
 
@@ -954,6 +977,7 @@ function renderFC(){
       <div class="fc" id="fc-card" onclick="flipFC()">
         <div class="fc-emoji">${w.emoji}</div>
         <div class="fc-en">${w.en} <button class="speak-btn" onclick="event.stopPropagation();speak('${esc(w.en)}')">🔊</button></div>
+        ${w.ph ? `<div class="fc-ph">[ ${w.ph} ]</div>` : ''}
         <div class="fc-cs" id="fc-cs" style="display:none">${w.cs}</div>
         ${w.ex?`<div class="fc-ex" id="fc-ex" style="display:none">"${w.ex}" <button class="speak-btn" onclick="event.stopPropagation();speak('${esc(w.ex)}')">🔊</button></div>`:''}
         <div class="fc-tip" id="fc-tip">👆 Tap to see Czech</div>
@@ -985,6 +1009,7 @@ function renderQuiz(){
       <span class="prog-label">${curQ+1}/${questions.length}</span>
     </div>
     <div class="q-text">${q.emoji} ${q.question} <button class="speak-btn" onclick="speak('${esc(q.question)}')">🔊</button></div>
+    ${q.ph ? `<div class="q-ph">[ ${q.ph} ]</div>` : ''}
     <div class="q-hint">What does this mean in Czech?</div>
     <div class="choices">
       ${q.choices.map(c=>`<button class="choice-btn" onclick="checkQ(this,'${esc(c)}','${esc(q.answer)}','quiz')">${c}</button>`).join('')}
