@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fef9f0;
+    --bg: #f5eeff;
     --card: #ffffff;
     --accent1: #ff6b6b;
     --accent2: #4ecdc4;
@@ -33,7 +33,8 @@
 
   body {
     font-family: 'Nunito', sans-serif;
-    background: var(--bg);
+    background: linear-gradient(160deg, #f5eeff 0%, #fff0f8 50%, #eef8ff 100%);
+    background-attachment: fixed;
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
@@ -45,9 +46,9 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(circle at 10% 20%, rgba(255,107,107,0.08) 0%, transparent 40%),
-      radial-gradient(circle at 90% 80%, rgba(78,205,196,0.10) 0%, transparent 40%),
-      radial-gradient(circle at 50% 50%, rgba(162,155,254,0.06) 0%, transparent 60%);
+      radial-gradient(circle at 10% 20%, rgba(255,107,107,0.18) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(78,205,196,0.18) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(162,155,254,0.14) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -59,15 +60,22 @@
     text-align: center;
     padding: 40px 20px 20px;
   }
-  .header-mascot { font-size: 56px; margin-bottom: 8px; display: block; animation: bounce 2s infinite; }
-  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  .header h1 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 36px;
-    color: var(--text);
-    letter-spacing: 0.5px;
+  .header-mascot { font-size: 72px; margin-bottom: 8px; display: block; animation: mascot-bounce 2.5s ease-in-out infinite; }
+  @keyframes mascot-bounce {
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    30%{transform:translateY(-14px) rotate(-8deg)}
+    60%{transform:translateY(-8px) rotate(5deg)}
   }
-  .header h1 span { color: var(--accent1); }
+  .header h1 { font-family: 'Fredoka One', cursive; font-size: 42px; color: var(--text); letter-spacing: 0.5px; }
+  .header h1 span {
+    background: linear-gradient(90deg, #ff6b6b, #feca57, #a29bfe, #fd79a8, #ff6b6b);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow-shift 4s linear infinite;
+  }
+  @keyframes rainbow-shift { 0%{background-position:0%} 100%{background-position:300%} }
   .header p { font-size: 15px; color: var(--muted); margin-top: 4px; font-weight: 600; }
 
   /* ===== SCREENS ===== */
@@ -77,12 +85,10 @@
 
   /* ===== SECTION LABEL ===== */
   .sec-label {
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin: 24px 0 12px;
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin: 24px 0 12px;
+    display: flex; align-items: center; gap: 8px;
   }
 
   /* ===== LESSON CARDS ===== */
@@ -93,23 +99,30 @@
     border-radius: var(--radius);
     padding: 20px;
     cursor: pointer;
-    border: 2px solid transparent;
-    box-shadow: var(--shadow);
-    transition: transform .2s, box-shadow .2s, border-color .2s;
+    border: 2.5px solid transparent;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 4px 0 rgba(0,0,0,0.06);
+    transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s, border-color .2s;
     position: relative;
     overflow: hidden;
   }
   .lcard::before {
     content: '';
     position: absolute;
-    top: -30px; right: -30px;
-    width: 80px; height: 80px;
+    top: -20px; right: -20px;
+    width: 100px; height: 100px;
     border-radius: 50%;
-    opacity: 0.12;
+    opacity: 0.18;
     transition: transform .3s;
   }
-  .lcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-  .lcard:hover::before { transform: scale(1.4); }
+  .lcard:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 16px 40px rgba(0,0,0,0.15), 0 4px 0 rgba(0,0,0,0.06); }
+  .lcard:hover::before { transform: scale(1.5); }
+  .lcard:active { transform: translateY(-2px); }
+
+  .lcard.c0 { background: linear-gradient(160deg, rgba(255,107,107,0.08) 0%, #fff 55%); }
+  .lcard.c1 { background: linear-gradient(160deg, rgba(78,205,196,0.10) 0%, #fff 55%); }
+  .lcard.c2 { background: linear-gradient(160deg, rgba(162,155,254,0.12) 0%, #fff 55%); }
+  .lcard.c3 { background: linear-gradient(160deg, rgba(253,121,168,0.10) 0%, #fff 55%); }
+  .lcard.c4 { background: linear-gradient(160deg, rgba(255,230,109,0.15) 0%, #fff 55%); }
 
   .lcard.c0::before { background: var(--accent1); }
   .lcard.c1::before { background: var(--accent2); }
@@ -122,25 +135,27 @@
   .lcard:hover.c3 { border-color: var(--accent5); }
   .lcard:hover.c4 { border-color: var(--accent3); }
 
-  .lcard-icon { font-size: 32px; margin-bottom: 10px; }
+  .lcard-icon { font-size: 36px; margin-bottom: 10px; }
   .lcard-title { font-size: 16px; font-weight: 800; }
   .lcard-sub { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 600; }
-  .lcard-count { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; }
-  .c0 .lcard-count { background: rgba(255,107,107,0.12); color: var(--accent1); }
-  .c1 .lcard-count { background: rgba(78,205,196,0.12); color: #00a896; }
-  .c2 .lcard-count { background: rgba(162,155,254,0.12); color: var(--accent4); }
-  .c3 .lcard-count { background: rgba(253,121,168,0.12); color: var(--accent5); }
-  .c4 .lcard-count { background: rgba(255,230,109,0.2); color: #c9930a; }
+  .lcard-count { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; }
+  .c0 .lcard-count { background: rgba(255,107,107,0.15); color: var(--accent1); }
+  .c1 .lcard-count { background: rgba(78,205,196,0.15); color: #00a896; }
+  .c2 .lcard-count { background: rgba(162,155,254,0.15); color: var(--accent4); }
+  .c3 .lcard-count { background: rgba(253,121,168,0.15); color: var(--accent5); }
+  .c4 .lcard-count { background: rgba(255,230,109,0.25); color: #c9930a; }
 
   /* ===== BACK BUTTON ===== */
   .back-btn {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 14px; font-weight: 700; color: var(--muted);
-    background: none; border: none; cursor: pointer;
-    padding: 8px 0; margin-bottom: 8px;
-    transition: color .15s;
+    font-size: 14px; font-weight: 800; color: var(--muted);
+    background: white; border: 2px solid var(--border); border-radius: 40px;
+    cursor: pointer; padding: 8px 16px; margin-bottom: 12px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+    transition: color .15s, border-color .15s, transform .12s, box-shadow .12s;
   }
-  .back-btn:hover { color: var(--text); }
+  .back-btn:hover { color: var(--text); border-color: var(--accent4); transform: translateY(-2px); box-shadow: 0 5px 0 rgba(0,0,0,0.08); }
+  .back-btn:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(0,0,0,0.08); }
 
   /* ===== LESSON HEADER ===== */
   .lesson-hdr {
@@ -176,37 +191,38 @@
   @media(min-width:500px){ .mode-grid { grid-template-columns: repeat(4,1fr); } }
 
   .mcard {
-    background: var(--card);
     border-radius: var(--radius);
-    padding: 20px 12px;
+    padding: 24px 12px;
     cursor: pointer;
     text-align: center;
-    border: 2px solid transparent;
-    box-shadow: var(--shadow);
-    transition: transform .2s, box-shadow .2s, border-color .2s;
+    border: none;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.12), 0 4px 20px rgba(0,0,0,0.12);
+    transition: transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .15s;
   }
-  .mcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-  .mcard.m0:hover { border-color: var(--accent1); }
-  .mcard.m1:hover { border-color: var(--accent2); }
-  .mcard.m2:hover { border-color: var(--accent4); }
-  .mcard.m3:hover { border-color: var(--accent5); }
-  .mcard-icon { font-size: 28px; margin-bottom: 8px; }
-  .mcard-name { font-size: 13px; font-weight: 800; }
-  .mcard-desc { font-size: 11px; color: var(--muted); margin-top: 3px; font-weight: 600; }
+  .mcard:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 10px 0 rgba(0,0,0,0.10), 0 8px 32px rgba(0,0,0,0.18); }
+  .mcard:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.12); }
+  .mcard.m0 { background: linear-gradient(135deg, #ff9a9e, #ff6b6b); }
+  .mcard.m1 { background: linear-gradient(135deg, #43e97b, #38d9a9); }
+  .mcard.m2 { background: linear-gradient(135deg, #c471ed, #a29bfe); }
+  .mcard.m3 { background: linear-gradient(135deg, #4facfe, #00d2ff); }
+  .mcard-icon { font-size: 34px; margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+  .mcard-name { font-size: 14px; font-weight: 800; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  .mcard-desc { font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 3px; font-weight: 700; }
 
   /* ===== ACTIVITY AREA ===== */
   .activity-card {
     background: var(--card);
     border-radius: var(--radius);
     padding: 28px 24px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 4px 0 rgba(0,0,0,0.04);
   }
 
   /* progress */
   .prog-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-  .prog-bar-wrap { flex: 1; background: #f0f0f0; border-radius: 20px; height: 8px; overflow: hidden; }
-  .prog-bar { height: 8px; border-radius: 20px; background: linear-gradient(90deg, var(--accent2), var(--accent4)); transition: width .4s ease; }
-  .prog-label { font-size: 12px; font-weight: 800; color: var(--muted); white-space: nowrap; }
+  .prog-bar-wrap { flex: 1; background: rgba(0,0,0,0.08); border-radius: 20px; height: 12px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.08); }
+  .prog-bar { height: 12px; border-radius: 20px; background: linear-gradient(90deg, #ff6b6b, #feca57, #a29bfe, #4ecdc4); background-size: 200%; animation: bar-shimmer 2s linear infinite; transition: width .4s ease; }
+  @keyframes bar-shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+  .prog-label { font-size: 13px; font-weight: 800; color: var(--muted); white-space: nowrap; }
 
   /* question */
   .q-text {
@@ -216,78 +232,86 @@
   .q-hint { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 20px; font-weight: 600; }
 
   /* choices */
-  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .choice-btn {
-    padding: 14px 12px;
-    border: 2px solid var(--border);
+    padding: 16px 14px;
+    border: 2.5px solid var(--border);
     border-radius: var(--radius-sm);
-    background: var(--card);
+    background: white;
     cursor: pointer;
     font-size: 14px; font-weight: 700;
     font-family: 'Nunito', sans-serif;
     color: var(--text);
-    text-align: left;
-    transition: border-color .15s, background .15s, transform .1s;
+    text-align: center;
+    transition: border-color .15s, background .15s, transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .15s;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.08);
   }
-  .choice-btn:hover:not(:disabled) { border-color: var(--accent4); background: rgba(162,155,254,0.06); transform: scale(1.01); }
-  .choice-btn.correct { background: rgba(0,184,148,0.1); border-color: var(--green); color: #00664d; }
-  .choice-btn.wrong { background: rgba(225,112,85,0.1); border-color: var(--red); color: #a0401f; }
+  .choice-btn:hover:not(:disabled) { border-color: var(--accent4); background: rgba(162,155,254,0.08); transform: scale(1.04) translateY(-2px); box-shadow: 0 6px 0 rgba(162,155,254,0.3); }
+  .choice-btn.correct { background: rgba(0,184,148,0.12); border-color: var(--green); color: #00664d; box-shadow: 0 3px 0 rgba(0,184,148,0.3); animation: correct-pop .4s cubic-bezier(.34,1.56,.64,1); }
+  .choice-btn.wrong { background: rgba(225,112,85,0.12); border-color: var(--red); color: #a0401f; animation: shake .4s ease; }
   .choice-btn:disabled { cursor: default; }
+  @keyframes correct-pop { 0%{transform:scale(1)} 50%{transform:scale(1.06)} 100%{transform:scale(1)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
 
   /* feedback */
   .feedback {
-    text-align: center; margin-top: 14px;
-    font-size: 16px; font-weight: 800; min-height: 26px;
-    transition: opacity .2s;
+    text-align: center; margin-top: 16px;
+    font-size: 18px; font-weight: 800; min-height: 28px;
   }
-  .feedback.ok { color: var(--green); }
+  .feedback.ok { color: var(--green); animation: feedback-pop .4s cubic-bezier(.34,1.56,.64,1); }
   .feedback.no { color: var(--red); }
+  @keyframes feedback-pop { 0%{transform:scale(0.8)} 70%{transform:scale(1.1)} 100%{transform:scale(1)} }
 
   /* next button */
   .next-btn {
     display: block; margin: 16px auto 0;
-    padding: 12px 32px;
-    background: linear-gradient(135deg, var(--accent4), var(--accent2));
+    padding: 14px 36px;
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
     color: white; border: none; border-radius: 40px;
-    font-size: 15px; font-weight: 800;
+    font-size: 16px; font-weight: 800;
     font-family: 'Nunito', sans-serif;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(162,155,254,0.4);
-    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 6px 0 #4834d4, 0 8px 20px rgba(108,92,231,0.4);
+    transition: transform .12s, box-shadow .12s;
   }
-  .next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(162,155,254,0.5); }
-  .next-btn:active { transform: scale(0.97); }
+  .next-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 #4834d4, 0 12px 28px rgba(108,92,231,0.5); }
+  .next-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #4834d4, 0 4px 12px rgba(108,92,231,0.3); }
 
   /* ===== FLASHCARD ===== */
   .fc-container { perspective: 1000px; margin-bottom: 16px; }
   .fc {
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffa8a8 100%);
     border-radius: var(--radius);
-    padding: 36px 24px;
+    padding: 40px 24px;
     text-align: center; cursor: pointer;
-    min-height: 200px;
+    min-height: 220px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-shadow: var(--shadow);
-    transition: transform .15s;
-    position: relative;
+    box-shadow: 0 8px 0 rgba(252,182,159,0.5), 0 12px 32px rgba(255,107,107,0.2);
+    transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+    position: relative; overflow: hidden;
   }
-  .fc:hover { transform: scale(1.01); }
-  .fc-emoji { font-size: 44px; margin-bottom: 12px; }
-  .fc-en { font-size: 28px; font-weight: 800; }
-  .fc-cs { font-size: 20px; color: rgba(45,52,54,0.7); margin-top: 10px; font-weight: 700; }
+  .fc:hover { transform: scale(1.02) rotate(1deg); }
+  .fc:active { transform: scale(0.98); }
+  .fc-emoji { font-size: 52px; margin-bottom: 12px; }
+  .fc-en { font-size: 30px; font-weight: 800; }
+  .fc-cs { font-size: 22px; color: rgba(45,52,54,0.7); margin-top: 10px; font-weight: 700; }
   .fc-ex { font-size: 13px; color: rgba(45,52,54,0.6); margin-top: 8px; font-style: italic; font-weight: 600; }
-  .fc-tip { font-size: 12px; color: rgba(45,52,54,0.5); margin-top: 14px; font-weight: 600; }
+  .fc-tip { font-size: 12px; color: rgba(45,52,54,0.5); margin-top: 16px; font-weight: 700; background: rgba(255,255,255,0.4); padding: 4px 12px; border-radius: 20px; display: inline-block; }
   .fc-nav { display: flex; gap: 10px; justify-content: center; }
   .fc-nav-btn {
     flex: 1; max-width: 140px;
     padding: 12px;
-    border: 2px solid var(--border); border-radius: var(--radius-sm);
-    background: var(--card); cursor: pointer;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: white;
+    cursor: pointer;
     font-size: 14px; font-weight: 800; font-family: 'Nunito', sans-serif;
     color: var(--text);
-    transition: border-color .15s, background .15s;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform .12s, box-shadow .12s;
   }
-  .fc-nav-btn:hover { border-color: var(--accent4); background: rgba(162,155,254,0.06); }
+  .fc-nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(0,0,0,0.10), 0 8px 16px rgba(0,0,0,0.12); }
+  .fc-nav-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.10); }
 
   /* ===== SPEAK BTN ===== */
   .speak-btn {
@@ -316,48 +340,52 @@
   .fill-input:focus { border-bottom-color: var(--accent1); }
   .submit-btn {
     display: block; margin: 14px auto 0;
-    padding: 11px 28px;
-    background: var(--card); border: 2px solid var(--accent4);
-    border-radius: 40px; font-size: 14px; font-weight: 800;
-    font-family: 'Nunito', sans-serif; color: var(--accent4);
-    cursor: pointer; transition: background .15s, color .15s;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #fd79a8, #e84393);
+    border: none; border-radius: 40px;
+    font-size: 15px; font-weight: 800;
+    font-family: 'Nunito', sans-serif; color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #b5006a, 0 8px 16px rgba(232,67,147,0.4);
+    transition: transform .12s, box-shadow .12s;
   }
-  .submit-btn:hover { background: var(--accent4); color: white; }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #b5006a, 0 10px 22px rgba(232,67,147,0.5); }
+  .submit-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b5006a; }
 
   /* ===== RESULT ===== */
-  .result-wrap {
-    text-align: center; padding: 32px 16px;
-  }
-  .result-trophy { font-size: 64px; margin-bottom: 12px; animation: pop .4s ease; }
-  @keyframes pop { 0%{transform:scale(0)} 70%{transform:scale(1.15)} 100%{transform:scale(1)} }
-  .result-score { font-family: 'Fredoka One', cursive; font-size: 56px; color: var(--green); }
+  .result-wrap { text-align: center; padding: 36px 16px; }
+  .result-trophy { font-size: 80px; margin-bottom: 12px; animation: trophy-pop .6s cubic-bezier(.34,1.56,.64,1); display: block; }
+  @keyframes trophy-pop { 0%{transform:scale(0) rotate(-30deg)} 60%{transform:scale(1.2) rotate(5deg)} 100%{transform:scale(1) rotate(0)} }
+  .result-score { font-family: 'Fredoka One', cursive; font-size: 64px; color: var(--green); line-height: 1; }
   .result-label { font-size: 16px; color: var(--muted); font-weight: 700; margin-top: 4px; }
-  .result-stars { font-size: 36px; margin: 12px 0; }
-  .result-msg { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
-  .result-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .result-stars { font-size: 48px; margin: 16px 0; animation: star-pop .8s cubic-bezier(.34,1.56,.64,1) .2s both; display: block; }
+  @keyframes star-pop { 0%{transform:scale(0)} 60%{transform:scale(1.15)} 100%{transform:scale(1)} }
+  .result-msg { font-size: 18px; font-weight: 800; margin-bottom: 24px; }
+  .result-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
   .result-btn {
-    padding: 11px 22px;
-    border: 2px solid var(--border); border-radius: 40px;
-    background: var(--card); font-size: 14px; font-weight: 800;
+    padding: 13px 24px;
+    border: none; border-radius: 40px;
+    background: white; font-size: 14px; font-weight: 800;
     font-family: 'Nunito', sans-serif; color: var(--text);
-    cursor: pointer; transition: border-color .15s, background .15s;
-    box-shadow: var(--shadow);
+    cursor: pointer;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.08);
+    transition: transform .12s, box-shadow .12s;
   }
-  .result-btn:hover { border-color: var(--accent4); background: rgba(162,155,254,0.06); }
-  .result-btn.primary { background: linear-gradient(135deg, var(--accent1), var(--accent5)); color: white; border-color: transparent; box-shadow: 0 4px 16px rgba(255,107,107,0.35); }
-  .result-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,107,107,0.45); }
+  .result-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.12); }
+  .result-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.10); }
+  .result-btn.primary { background: linear-gradient(135deg, #ff6b6b, #fd79a8); color: white; box-shadow: 0 5px 0 #c0002a, 0 6px 20px rgba(255,107,107,0.4); }
+  .result-btn.primary:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #c0002a, 0 10px 28px rgba(255,107,107,0.5); }
 
   /* ===== STREAK / SCORE BADGE ===== */
-  .top-bar {
-    display: flex; justify-content: flex-end; gap: 8px; padding: 12px 0 0;
-    margin-bottom: -4px;
-  }
+  .top-bar { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 0 0; margin-bottom: -4px; }
   .badge {
     display: flex; align-items: center; gap: 5px;
-    background: var(--card); border-radius: 20px; padding: 6px 14px;
-    font-size: 13px; font-weight: 800; box-shadow: var(--shadow);
+    background: white; border-radius: 20px; padding: 7px 16px;
+    font-size: 13px; font-weight: 800;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10), 0 3px 0 rgba(0,0,0,0.08);
     color: var(--text);
   }
+  #level-badge { background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; box-shadow: 0 4px 12px rgba(108,92,231,0.4), 0 3px 0 rgba(108,92,231,0.3); }
 
   /* ===== CONFETTI ===== */
   .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 100; overflow: hidden; }
@@ -390,6 +418,85 @@
     .choices { grid-template-columns: 1fr; }
     .activity-card { padding: 20px 16px; }
   }
+
+  /* ===== UNIT SECTIONS ===== */
+  .unit-section { margin-bottom: 28px; }
+
+  .unit-hdr {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+  }
+  .unit-hdr.c0 { background: linear-gradient(135deg, rgba(255,107,107,0.18) 0%, rgba(255,107,107,0.05) 100%); border: 2px solid rgba(255,107,107,0.25); }
+  .unit-hdr.c1 { background: linear-gradient(135deg, rgba(78,205,196,0.18) 0%, rgba(78,205,196,0.05) 100%); border: 2px solid rgba(78,205,196,0.25); }
+  .unit-hdr.c2 { background: linear-gradient(135deg, rgba(162,155,254,0.18) 0%, rgba(162,155,254,0.05) 100%); border: 2px solid rgba(162,155,254,0.25); }
+  .unit-hdr.c3 { background: linear-gradient(135deg, rgba(253,121,168,0.18) 0%, rgba(253,121,168,0.05) 100%); border: 2px solid rgba(253,121,168,0.25); }
+  .unit-hdr.c4 { background: linear-gradient(135deg, rgba(255,230,109,0.25) 0%, rgba(255,230,109,0.08) 100%); border: 2px solid rgba(255,230,109,0.35); }
+  .unit-hdr-icon { font-size: 32px; }
+  .unit-hdr-title { font-size: 16px; font-weight: 800; }
+  .unit-hdr-sub { font-size: 12px; color: var(--muted); font-weight: 700; margin-top: 3px; }
+
+  /* ===== LESSON CARD STARS ===== */
+  .lcard-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+  .lcard-stars { font-size: 13px; letter-spacing: 1px; }
+  .lcard.started { border-color: var(--accent3) !important; }
+  .lcard.mastered { border-color: var(--green) !important; }
+  .lcard.mastered .lcard-stars { filter: drop-shadow(0 0 6px rgba(255,200,0,0.8)); }
+  .lcard.mastered::after {
+    content: '✓';
+    position: absolute; top: 10px; right: 14px;
+    font-size: 14px; font-weight: 900; color: var(--green);
+    background: rgba(0,184,148,0.12); border-radius: 50%;
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+    text-align: center; line-height: 24px;
+  }
+
+  /* ===== PRONUNCIATION GUIDE ===== */
+  .fc-ph {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6c5ce7;
+    background: rgba(162,155,254,0.18);
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+    font-family: 'Courier New', monospace;
+  }
+  .q-ph {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6c5ce7;
+    margin: -4px 0 12px;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ===== MIC / PRONUNCIATION CHECK ===== */
+  .mic-section { text-align: center; margin: 14px 0 10px; }
+  .mic-btn {
+    background: linear-gradient(135deg, #fd79a8, #e84393);
+    color: white; border: none; border-radius: 40px;
+    padding: 11px 26px; font-size: 15px; font-weight: 800;
+    font-family: 'Nunito', sans-serif; cursor: pointer;
+    box-shadow: 0 5px 0 #b5006a, 0 6px 16px rgba(232,67,147,0.35);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .mic-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #b5006a, 0 10px 22px rgba(232,67,147,0.45); }
+  .mic-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b5006a; }
+  .mic-btn:disabled { opacity: 0.7; cursor: wait; }
+  .mic-btn.listening {
+    background: linear-gradient(135deg, #ff6b6b, #ee0979);
+    animation: mic-pulse 1s ease infinite;
+  }
+  @keyframes mic-pulse {
+    0%,100% { box-shadow: 0 5px 0 #a00, 0 0 0 0 rgba(255,107,107,0.5); }
+    50%      { box-shadow: 0 5px 0 #a00, 0 0 0 14px rgba(255,107,107,0); }
+  }
+  .mic-result { margin-top: 10px; font-size: 15px; font-weight: 800; min-height: 24px; }
 </style>
 </head>
 <body>
@@ -398,6 +505,7 @@
 
 <div class="app">
   <div class="top-bar">
+    <div class="badge" id="level-badge">🌱 Beginner</div>
     <div class="badge">⭐ <span id="total-score">0</span> pts</div>
     <div class="badge">🔥 <span id="streak">0</span></div>
   </div>
@@ -405,14 +513,14 @@
   <div class="header">
     <span class="header-mascot">🦉</span>
     <h1>English with <span>Bloggers</span></h1>
-    <p>Unit 2 · My Family &amp; Appearance</p>
+    <p>Bloggers A1.1 · Practice English!</p>
   </div>
 
   <!-- SCREEN: home -->
   <div class="screen active" id="screen-home">
     <div id="install-banner-wrap"></div>
-    <div class="sec-label">📚 Choose your lesson</div>
-    <div class="lesson-grid" id="lesson-grid"></div>
+    <div class="sec-label">🎮 Pick a lesson to play!</div>
+    <div id="unit-list"></div>
   </div>
 
   <!-- SCREEN: mode -->
@@ -420,7 +528,7 @@
     <button class="back-btn" onclick="showScreen('home')">← Back</button>
     <div class="lesson-hdr" id="lesson-hdr"></div>
     <div id="gram-preview"></div>
-    <div class="sec-label">🎮 Choose your activity</div>
+    <div class="sec-label">⚡ How do you want to play?</div>
     <div class="mode-grid">
       <div class="mcard m0" onclick="startActivity('flashcards')">
         <div class="mcard-icon">🃏</div>
@@ -472,237 +580,265 @@
 
 <script>
 // ===== DATA — exact vocabulary from Bloggers A1.1 workbook pp.72–73 =====
-const LESSONS = [
+const UNITS = [
   {
-    id:0, icon:"👨‍👩‍👧‍👦", title:"2A – We are family!", tag:"Family words",
-    topic:"Family members · pp.42–43 · workbook p.72",
+    id: 2,
+    title: "Unit 2 – My Family & Appearance",
+    icon: "👨‍👩‍👧‍👦",
     color: 0,
-    grammar:{
-      title:"have got — positive & negative",
-      rows:[
-        {subject:"I / You / We / They", pos:"have got", neg:"haven't got", ex:"a sister"},
-        {subject:"He / She / It", pos:"has got", neg:"hasn't got", ex:"a brother"},
-      ]
-    },
-    // exact word list from workbook p.72 — 2A column
-    vocab:[
-      {en:"aunt",          cs:"teta",                          emoji:"👩",  ex:"This is my aunt."},
-      {en:"brother",       cs:"bratr",                         emoji:"🧑",  ex:"I haven't got a brother."},
-      {en:"children",      cs:"děti",                          emoji:"👦👧", ex:"They have got one daughter."},
-      {en:"cousin",        cs:"bratranec / sestřenice",         emoji:"🧒",  ex:"She is my cousin."},
-      {en:"daughter",      cs:"dcera",                         emoji:"👧",  ex:"They have got one daughter."},
-      {en:"father / daddy",cs:"otec / táta",                   emoji:"👨",  ex:"He is my father."},
-      {en:"granddaughter", cs:"vnučka",                        emoji:"👧",  ex:"She is their granddaughter."},
-      {en:"grandfather / grandpa", cs:"dědeček ❹ / děda",     emoji:"👴",  ex:"My grandpa loves the car."},
-      {en:"grandmother / grandma", cs:"babička ❺ / babi",     emoji:"👵",  ex:"I love my grandma!"},
-      {en:"grandparents",  cs:"prarodiče",                     emoji:"👴👵", ex:"My grandparents are really fun."},
-      {en:"grandson",      cs:"vnuk",                          emoji:"👦",  ex:"He is their grandson."},
-      {en:"husband",       cs:"manžel",                        emoji:"💍",  ex:"Her husband is kind."},
-      {en:"mother / mum",  cs:"matka / máma",                  emoji:"👩",  ex:"She is my mother."},
-      {en:"parents",       cs:"rodiče",                        emoji:"👫",  ex:"My parents are from America."},
-      {en:"sister",        cs:"sestra",                        emoji:"👧",  ex:"My sister is called Claire."},
-      {en:"son",           cs:"syn ❻",                        emoji:"👦",  ex:"He is their son."},
-      {en:"uncle",         cs:"strýc",                         emoji:"🧔",  ex:"My uncle is funny."},
-      {en:"wife",          cs:"manželka",                      emoji:"💍",  ex:"His wife is pretty."},
-      // 2B extra family words from workbook p.72
-      {en:"divorced",      cs:"rozvedený/á",                   emoji:"📋",  ex:"They are divorced."},
-      {en:"half-brother",  cs:"nevlastní bratr (polorodý)",    emoji:"🧑",  ex:"He is my half-brother."},
-      {en:"half-sister",   cs:"nevlastní sestra (polorodá)",   emoji:"👧",  ex:"She is my half-sister."},
-      {en:"stepbrother",   cs:"nevlastní bratr (stejný otec/stejná matka)", emoji:"🧑", ex:"He is my stepbrother."},
-      {en:"stepfather",    cs:"nevlastní otec",                emoji:"👨",  ex:"He is my stepfather."},
-      {en:"stepmother",    cs:"nevlastní matka",               emoji:"👩",  ex:"She is my stepmother."},
-      {en:"stepsister",    cs:"nevlastní sestra",              emoji:"👧",  ex:"She is my stepsister."},
-    ],
-    fill:[
-      {s:"This is my ___. She is my mum's sister.",   a:"aunt",      h:"teta"},
-      {s:"I haven't got a ___. I am an only child.",  a:"brother",   h:"bratr"},
-      {s:"They have got one ___ and two sons.",        a:"daughter",  h:"dcera"},
-      {s:"He is my father / ___.",                     a:"daddy",     h:"táta"},
-      {s:"My ___ are from 2 different countries.",     a:"parents",   h:"rodiče"},
-      {s:"I love my ___! She is really fun.",          a:"grandma",   h:"babi"},
-      {s:"He is my ___. He is my dad's brother.",     a:"uncle",     h:"strýc"},
-      {s:"They are ___. They don't live together.",   a:"divorced",  h:"rozvedení"},
-    ]
-  },
-  {
-    id:1, icon:"🤔", title:"2B – Different families", tag:"have got grammar",
-    topic:"Questions & short answers · pp.44–45",
-    color: 1,
-    grammar:{
-      title:"have got — questions & short answers",
-      rows:[
-        {subject:"Have you got a brother?",  pos:"Yes, I have.",    neg:"No, I haven't.", ex:""},
-        {subject:"Has she got a sister?",    pos:"Yes, she has.",   neg:"No, she hasn't.", ex:""},
-        {subject:"Have they got a dog?",     pos:"Yes, they have.", neg:"No, they haven't.", ex:""},
-      ]
-    },
-    vocab:[
-      {en:"Have you got a brother?",   cs:"Máš bratra?",           emoji:"❓", ex:"Have you got a brother? Yes, I have."},
-      {en:"Has she got a sister?",     cs:"Má ona sestru?",         emoji:"❓", ex:"Has she got a sister? No, she hasn't."},
-      {en:"Have they got a dog?",      cs:"Mají psa?",              emoji:"🐕", ex:"Have they got a dog? Yes, they have."},
-      {en:"Yes, I have.",              cs:"Ano, mám.",              emoji:"✅", ex:"Have you got a cat? Yes, I have."},
-      {en:"No, I haven't.",            cs:"Ne, nemám.",             emoji:"❌", ex:"Have you got a dog? No, I haven't."},
-      {en:"Yes, she has.",             cs:"Ano, má.",               emoji:"✅", ex:"Has she got glasses? Yes, she has."},
-      {en:"No, he hasn't.",            cs:"Ne, nemá.",              emoji:"❌", ex:"Has he got a beard? No, he hasn't."},
-      {en:"Yes, we have.",             cs:"Ano, máme.",             emoji:"✅", ex:"Have you got a big family? Yes, we have."},
-      {en:"No, they haven't.",         cs:"Ne, nemají.",            emoji:"❌", ex:"Have they got cousins? No, they haven't."},
-      {en:"a big family",              cs:"velká rodina",           emoji:"👨‍👩‍👧‍👦", ex:"I have got a big family."},
-      {en:"an only child",             cs:"jedináček / jedináčka",  emoji:"🧒", ex:"She is an only child."},
-    ],
-    fill:[
-      {s:"___ you got a sister? Yes, I have.",        a:"Have",    h:"Have / Has"},
-      {s:"Has she ___ a dog? No, she hasn't.",        a:"got",     h:"have got"},
-      {s:"Have they got a dog? Yes, they ___.",       a:"have",    h:"krátká odpověď"},
-      {s:"Has he got a beard? No, he ___.",           a:"hasn't",  h:"záporná krátká odpověď"},
-      {s:"I have got a big ___. Six people!",         a:"family",  h:"rodina"},
-      {s:"She is an only ___. No brothers or sisters.", a:"child", h:"jedináček"},
-    ]
-  },
-  {
-    id:2, icon:"👁️", title:"2C – Have you got blue eyes?", tag:"Appearance",
-    topic:"Hair, eyes & details · pp.46–47 · workbook p.73",
-    color: 2,
-    grammar:{
-      title:"Describing appearance — from workbook p.73",
-      rows:[
-        {subject:"EYES",         pos:"brown · blue · green · dark",                    neg:"", ex:""},
-        {subject:"HAIR COLOUR",  pos:"brown · black · blond · dark · red · grey · white", neg:"", ex:""},
-        {subject:"HAIR LENGTH",  pos:"long · shoulder-length · short",                 neg:"", ex:""},
-        {subject:"HAIR TYPE",    pos:"curly · wavy · straight",                        neg:"", ex:""},
-        {subject:"DETAILS",      pos:"glasses · beard · moustache · tattoo",           neg:"", ex:""},
-      ]
-    },
-    // exact word list from workbook p.73 — 2C column
-    vocab:[
-      // Eyes
-      {en:"brown eyes",          cs:"hnědé oči",          emoji:"🟤", ex:"She has got brown eyes."},
-      {en:"blue eyes",           cs:"modré oči",          emoji:"💙", ex:"She has got blue eyes."},
-      {en:"green eyes",          cs:"zelené oči",         emoji:"💚", ex:"He has got green eyes."},
-      // Hair colour
-      {en:"blond hair",          cs:"blond vlasy",        emoji:"👱", ex:"She has got blond hair."},
-      {en:"brown hair",          cs:"hnědé vlasy",        emoji:"🟤", ex:"He has got short, brown hair."},
-      {en:"dark / black hair",   cs:"tmavé / černé vlasy",emoji:"🖤", ex:"My dad has got dark hair."},
-      {en:"grey hair",           cs:"šedivé vlasy",       emoji:"⚪", ex:"My grandfather has got grey hair."},
-      {en:"red hair",            cs:"zrzavé vlasy",       emoji:"🔴", ex:"Who has got red hair?"},
-      {en:"white hair",          cs:"bílé vlasy",         emoji:"🤍", ex:"She has got white hair."},
-      // Hair length
-      {en:"long hair",           cs:"dlouhé vlasy",       emoji:"💇‍♀️", ex:"She has got long, blond hair."},
-      {en:"short hair",          cs:"krátké vlasy",       emoji:"💇",  ex:"He has got short hair."},
-      {en:"shoulder-length hair",cs:"vlasy na ramena (poloduohé)", emoji:"👱‍♀️", ex:"She has got shoulder-length hair."},
-      // Hair type
-      {en:"curly hair",          cs:"kudrnaté vlasy",     emoji:"🌀", ex:"She has got long, curly hair."},
-      {en:"straight hair",       cs:"rovné vlasy",        emoji:"➡️", ex:"He has got straight, dark hair."},
-      {en:"wavy hair",           cs:"vlnité vlasy",       emoji:"🌊", ex:"My mum has got wavy hair."},
-      // Details
-      {en:"a beard",             cs:"vous / knír",        emoji:"🧔", ex:"My dad has got a beard."},
-      {en:"glasses",             cs:"brýle",              emoji:"👓", ex:"He wears glasses."},
-      {en:"a moustache",         cs:"knír",               emoji:"🥸", ex:"He has got a moustache."},
-      {en:"a tattoo",            cs:"tetování",           emoji:"💪", ex:"She has got a tattoo."},
-    ],
-    fill:[
-      {s:"She has got long, ___ hair.",                a:"curly",           h:"kudrnaté"},
-      {s:"He has got ___ eyes — really blue!",         a:"blue",            h:"modré"},
-      {s:"My dad has got a ___. He doesn't shave.",    a:"beard",           h:"vous"},
-      {s:"She wears ___. She can't see well.",         a:"glasses",         h:"brýle"},
-      {s:"His hair is ___. Not curly at all.",         a:"straight",        h:"rovné"},
-      {s:"Her hair is ___. Down to her shoulders.",   a:"shoulder-length", h:"na ramena"},
-      {s:"He has got a ___ and a moustache.",         a:"beard",           h:"vous"},
-      {s:"She has got short, ___ hair.",               a:"blond",           h:"blond"},
-    ]
-  },
-  {
-    id:3, icon:"⭐", title:"2D – Famous families", tag:"Describing people",
-    topic:"Physical appearance · pp.48–49 · workbook p.73",
-    color: 3,
-    grammar:{
-      title:"FIGURE / POSTAVA — from workbook p.73",
-      rows:[
-        {subject:"chubby / fat",      pos:"buclatý / tlusťoučký / tlustý",  neg:"", ex:""},
-        {subject:"medium-height",     pos:"střední výšky / středně velký",   neg:"", ex:""},
-        {subject:"slim",              pos:"štíhlý/á",                        neg:"", ex:""},
-        {subject:"short",             pos:"malý/á",                          neg:"", ex:""},
-        {subject:"tall",              pos:"vysoký/á",                        neg:"", ex:""},
-        {subject:"thin",              pos:"hubený/á / tenký",                neg:"", ex:""},
-      ]
-    },
-    // exact adjectives from workbook p.73 — 2D column
-    vocab:[
-      // Figure
-      {en:"chubby",        cs:"buclatý/á / tlusťoučký",    emoji:"🤗", ex:"He is a bit chubby."},
-      {en:"fat",           cs:"tlustý/á",                  emoji:"😅", ex:"He is quite fat."},
-      {en:"medium-height", cs:"střední výšky",             emoji:"🧍", ex:"She is medium-height."},
-      {en:"slim",          cs:"štíhlý/á",                  emoji:"🧍", ex:"They are both slim."},
-      {en:"short",         cs:"malý/á (o výšce)",          emoji:"🧒", ex:"Mum is short and very thin."},
-      {en:"tall",          cs:"vysoký/á",                  emoji:"🏀", ex:"My dad is quite tall."},
-      {en:"thin",          cs:"hubený/á / tenký",          emoji:"🧍", ex:"She is short and very thin."},
-      // Other adjectives from workbook p.73
-      {en:"a bit",         cs:"trochu / poněkud",          emoji:"🔅", ex:"He is a bit chubby."},
-      {en:"beautiful",     cs:"krásná / hezká",            emoji:"😍", ex:"She is beautiful."},
-      {en:"intelligent",   cs:"chytrý/á / inteligentní",   emoji:"🧠", ex:"She is the most intelligent."},
-      {en:"quite",         cs:"docela",                    emoji:"👌", ex:"She is quite tall."},
-      {en:"the eldest of", cs:"nejstarší z",               emoji:"👴", ex:"He is the eldest of the family."},
-      {en:"the youngest of",cs:"nejmladší z",              emoji:"🧒", ex:"She is the youngest of four."},
-      // Phrases from 2D
-      {en:"in her opinion",cs:"dle jejího názoru",         emoji:"💬", ex:"She is beautiful, in her opinion."},
-      {en:"bright",        cs:"zářivý/á / bystý/á",        emoji:"✨", ex:"She has got bright eyes."},
-      {en:"shy",           cs:"stydlivý/á",                emoji:"😳", ex:"She is quite shy."},
-      {en:"soft",          cs:"hebký/á / měkký",           emoji:"🌸", ex:"She has got soft hair."},
-      {en:"sweet",         cs:"milý/á / roztomilý/á / sladký", emoji:"🍬", ex:"She is very sweet."},
-      {en:"tímid",         cs:"nesmělý/á / bázlivý",       emoji:"🐭", ex:"She seems timid."},
-    ],
-    fill:[
-      {s:"She is ___ and slim. Not short at all.",          a:"tall",        h:"vysoká"},
-      {s:"He is ___ and quite fat. Not slim.",              a:"short",       h:"malý"},
-      {s:"She is the ___ of four. Only 13.",               a:"youngest",    h:"nejmladší"},
-      {s:"She is the most ___. She gets top grades.",      a:"intelligent", h:"inteligentní"},
-      {s:"He is a ___ chubby, not very slim.",             a:"bit",         h:"trochu"},
-      {s:"She is ___ height — not tall, not short.",       a:"medium",      h:"střední"},
-      {s:"She is ___. She doesn't like speaking in class.",a:"shy",         h:"stydlivá"},
-      {s:"He is ___. Much taller than his sister.",        a:"tall",        h:"vysoký"},
-    ]
-  },
-  {
-    id:4, icon:"📖", title:"Sarah's family", tag:"Reading + extra vocab",
-    topic:"Sarah's blog + other useful words · pp.50–51",
-    color: 4,
-    grammar: null,
-    vocab:[
-      {en:"bilingual",       cs:"dvojjazyčný/á",            emoji:"🗣️", ex:"I am bilingual — Czech and English."},
-      {en:"hometown",        cs:"rodné město",              emoji:"🏠", ex:"Her hometown is a fantastic place."},
-      {en:"American",        cs:"Američan/ka / americký",   emoji:"🇺🇸", ex:"My mum is American."},
-      {en:"Czech",           cs:"Čech / česky / český",     emoji:"🇨🇿", ex:"My dad is Czech."},
-      {en:"fantastic",       cs:"fantastický/á",            emoji:"🌟", ex:"New York is a fantastic city."},
-      {en:"both",            cs:"oba / obě",                emoji:"2️⃣", ex:"They are both slim."},
-      {en:"really",          cs:"opravdu / skutečně",       emoji:"💯", ex:"My grandparents are really fun."},
-      {en:"sweetheart",      cs:"miláček",                  emoji:"❤️", ex:"Claire is the sweetheart of our family."},
-      {en:"lovely",          cs:"roztomilý/á / krásný/á",   emoji:"🌸", ex:"She has got lovely brown eyes."},
-      {en:"selfie",          cs:"selfie",                   emoji:"🤳", ex:"She sends me a selfie."},
-      {en:"send",            cs:"poslat / posílat",         emoji:"📨", ex:"She sends me messages."},
-      {en:"look young",      cs:"vypadat mladě",            emoji:"😊", ex:"My parents look very young."},
-      {en:"wear glasses",    cs:"nosit brýle",              emoji:"👓", ex:"Dad wears glasses."},
-      {en:"quite tall",      cs:"celkem vysoký/á",          emoji:"📏", ex:"Dad is quite tall."},
-      {en:"short red hair",  cs:"krátké zrzavé vlasy",      emoji:"🔴", ex:"She has got short red hair."},
-      {en:"shoulder-length white hair", cs:"bílé vlasy na ramena", emoji:"🤍", ex:"She has got shoulder-length white hair."},
-    ],
-    fill:[
-      {s:"I am ___. I can speak Czech and English.",     a:"bilingual", h:"dvojjazyčný/á"},
-      {s:"My dad ___ glasses and has got a beard.",      a:"wears",     h:"nosí"},
-      {s:"They ___ very young. They are 40 and 35.",     a:"look",      h:"vypadají"},
-      {s:"She has got short ___ hair. Like fire!",       a:"red",       h:"zrzavé"},
-      {s:"She ___ me a selfie every holiday.",           a:"sends",     h:"posílá"},
-      {s:"My grandparents are ___ fun!",                 a:"really",    h:"opravdu"},
+    lessons: [
+      {
+        id:0, icon:"👨‍👩‍👧‍👦", title:"2A – We are family!", tag:"Family words",
+        topic:"Family members · pp.42–43 · workbook p.72",
+        color: 0,
+        grammar:{
+          title:"have got — positive & negative",
+          rows:[
+            {subject:"I / You / We / They", pos:"have got", neg:"haven't got", ex:"a sister"},
+            {subject:"He / She / It", pos:"has got", neg:"hasn't got", ex:"a brother"},
+          ]
+        },
+        // exact word list from workbook p.72 — 2A column
+        vocab:[
+          {en:"aunt",          cs:"teta",                          emoji:"👩",  ex:"This is my aunt.",           ph:"ant"},
+          {en:"brother",       cs:"bratr",                         emoji:"🧑",  ex:"I haven't got a brother.",   ph:"BRO·ther"},
+          {en:"children",      cs:"děti",                          emoji:"👦👧", ex:"They have got one daughter.", ph:"CHIL·dren"},
+          {en:"cousin",        cs:"bratranec / sestřenice",         emoji:"🧒",  ex:"She is my cousin.",          ph:"KUZ·in"},
+          {en:"daughter",      cs:"dcera",                         emoji:"👧",  ex:"They have got one daughter.", ph:"DAW·ter"},
+          {en:"father / daddy",cs:"otec / táta",                   emoji:"👨",  ex:"He is my father.",           ph:"FA·ther / DA·dy"},
+          {en:"granddaughter", cs:"vnučka",                        emoji:"👧",  ex:"She is their granddaughter.", ph:"GRAND·daw·ter"},
+          {en:"grandfather / grandpa", cs:"dědeček ❹ / děda",     emoji:"👴",  ex:"My grandpa loves the car.",  ph:"GRAND·fa·ther / GRAN·pa"},
+          {en:"grandmother / grandma", cs:"babička ❺ / babi",     emoji:"👵",  ex:"I love my grandma!",         ph:"GRAND·muh·ther / GRAN·ma"},
+          {en:"grandparents",  cs:"prarodiče",                     emoji:"👴👵", ex:"My grandparents are really fun.", ph:"GRAND·pair·ents"},
+          {en:"grandson",      cs:"vnuk",                          emoji:"👦",  ex:"He is their grandson.",      ph:"GRAN·sun"},
+          {en:"husband",       cs:"manžel",                        emoji:"💍",  ex:"Her husband is kind.",       ph:"HUZ·band"},
+          {en:"mother / mum",  cs:"matka / máma",                  emoji:"👩",  ex:"She is my mother.",          ph:"MUH·ther / mum"},
+          {en:"parents",       cs:"rodiče",                        emoji:"👫",  ex:"My parents are from America.", ph:"PAIR·ents"},
+          {en:"sister",        cs:"sestra",                        emoji:"👧",  ex:"My sister is called Claire.", ph:"SIS·ter"},
+          {en:"son",           cs:"syn ❻",                        emoji:"👦",  ex:"He is their son.",           ph:"sun"},
+          {en:"uncle",         cs:"strýc",                         emoji:"🧔",  ex:"My uncle is funny.",         ph:"UNG·kl"},
+          {en:"wife",          cs:"manželka",                      emoji:"💍",  ex:"His wife is pretty.",        ph:"wyfe"},
+          // 2B extra family words from workbook p.72
+          {en:"divorced",      cs:"rozvedený/á",                   emoji:"📋",  ex:"They are divorced.",         ph:"di·VORST"},
+          {en:"half-brother",  cs:"nevlastní bratr (polorodý)",    emoji:"🧑",  ex:"He is my half-brother.",    ph:"haf·BRO·ther"},
+          {en:"half-sister",   cs:"nevlastní sestra (polorodá)",   emoji:"👧",  ex:"She is my half-sister.",    ph:"haf·SIS·ter"},
+          {en:"stepbrother",   cs:"nevlastní bratr (stejný otec/stejná matka)", emoji:"🧑", ex:"He is my stepbrother.", ph:"STEP·bru·ther"},
+          {en:"stepfather",    cs:"nevlastní otec",                emoji:"👨",  ex:"He is my stepfather.",      ph:"STEP·fa·ther"},
+          {en:"stepmother",    cs:"nevlastní matka",               emoji:"👩",  ex:"She is my stepmother.",     ph:"STEP·muh·ther"},
+          {en:"stepsister",    cs:"nevlastní sestra",              emoji:"👧",  ex:"She is my stepsister.",     ph:"STEP·sis·ter"},
+        ],
+        fill:[
+          {s:"This is my ___. She is my mum's sister.",   a:"aunt",      h:"teta"},
+          {s:"I haven't got a ___. I am an only child.",  a:"brother",   h:"bratr"},
+          {s:"They have got one ___ and two sons.",        a:"daughter",  h:"dcera"},
+          {s:"He is my father / ___.",                     a:"daddy",     h:"táta"},
+          {s:"My ___ are from 2 different countries.",     a:"parents",   h:"rodiče"},
+          {s:"I love my ___! She is really fun.",          a:"grandma",   h:"babi"},
+          {s:"He is my ___. He is my dad's brother.",     a:"uncle",     h:"strýc"},
+          {s:"They are ___. They don't live together.",   a:"divorced",  h:"rozvedení"},
+        ]
+      },
+      {
+        id:1, icon:"🤔", title:"2B – Different families", tag:"have got grammar",
+        topic:"Questions & short answers · pp.44–45",
+        color: 1,
+        grammar:{
+          title:"have got — questions & short answers",
+          rows:[
+            {subject:"Have you got a brother?",  pos:"Yes, I have.",    neg:"No, I haven't.", ex:""},
+            {subject:"Has she got a sister?",    pos:"Yes, she has.",   neg:"No, she hasn't.", ex:""},
+            {subject:"Have they got a dog?",     pos:"Yes, they have.", neg:"No, they haven't.", ex:""},
+          ]
+        },
+        vocab:[
+          {en:"Have you got a brother?",   cs:"Máš bratra?",           emoji:"❓", ex:"Have you got a brother? Yes, I have."},
+          {en:"Has she got a sister?",     cs:"Má ona sestru?",         emoji:"❓", ex:"Has she got a sister? No, she hasn't."},
+          {en:"Have they got a dog?",      cs:"Mají psa?",              emoji:"🐕", ex:"Have they got a dog? Yes, they have."},
+          {en:"Yes, I have.",              cs:"Ano, mám.",              emoji:"✅", ex:"Have you got a cat? Yes, I have."},
+          {en:"No, I haven't.",            cs:"Ne, nemám.",             emoji:"❌", ex:"Have you got a dog? No, I haven't."},
+          {en:"Yes, she has.",             cs:"Ano, má.",               emoji:"✅", ex:"Has she got glasses? Yes, she has."},
+          {en:"No, he hasn't.",            cs:"Ne, nemá.",              emoji:"❌", ex:"Has he got a beard? No, he hasn't."},
+          {en:"Yes, we have.",             cs:"Ano, máme.",             emoji:"✅", ex:"Have you got a big family? Yes, we have."},
+          {en:"No, they haven't.",         cs:"Ne, nemají.",            emoji:"❌", ex:"Have they got cousins? No, they haven't."},
+          {en:"a big family",              cs:"velká rodina",           emoji:"👨‍👩‍👧‍👦", ex:"I have got a big family.",    ph:"a·big·FAM·i·lee"},
+          {en:"an only child",             cs:"jedináček / jedináčka",  emoji:"🧒", ex:"She is an only child.",      ph:"an·OHN·lee·chyld"},
+        ],
+        fill:[
+          {s:"___ you got a sister? Yes, I have.",        a:"Have",    h:"Have / Has"},
+          {s:"Has she ___ a dog? No, she hasn't.",        a:"got",     h:"have got"},
+          {s:"Have they got a dog? Yes, they ___.",       a:"have",    h:"krátká odpověď"},
+          {s:"Has he got a beard? No, he ___.",           a:"hasn't",  h:"záporná krátká odpověď"},
+          {s:"I have got a big ___. Six people!",         a:"family",  h:"rodina"},
+          {s:"She is an only ___. No brothers or sisters.", a:"child", h:"jedináček"},
+        ]
+      },
+      {
+        id:2, icon:"👁️", title:"2C – Have you got blue eyes?", tag:"Appearance",
+        topic:"Hair, eyes & details · pp.46–47 · workbook p.73",
+        color: 2,
+        grammar:{
+          title:"Describing appearance — from workbook p.73",
+          rows:[
+            {subject:"EYES",         pos:"brown · blue · green · dark",                    neg:"", ex:""},
+            {subject:"HAIR COLOUR",  pos:"brown · black · blond · dark · red · grey · white", neg:"", ex:""},
+            {subject:"HAIR LENGTH",  pos:"long · shoulder-length · short",                 neg:"", ex:""},
+            {subject:"HAIR TYPE",    pos:"curly · wavy · straight",                        neg:"", ex:""},
+            {subject:"DETAILS",      pos:"glasses · beard · moustache · tattoo",           neg:"", ex:""},
+          ]
+        },
+        // exact word list from workbook p.73 — 2C column
+        vocab:[
+          // Eyes
+          {en:"brown eyes",          cs:"hnědé oči",          emoji:"🟤", ex:"She has got brown eyes.",           ph:"brown·eyes"},
+          {en:"blue eyes",           cs:"modré oči",          emoji:"💙", ex:"She has got blue eyes.",            ph:"bloo·eyes"},
+          {en:"green eyes",          cs:"zelené oči",         emoji:"💚", ex:"He has got green eyes.",            ph:"green·eyes"},
+          // Hair colour
+          {en:"blond hair",          cs:"blond vlasy",        emoji:"👱", ex:"She has got blond hair.",           ph:"blond·hair"},
+          {en:"brown hair",          cs:"hnědé vlasy",        emoji:"🟤", ex:"He has got short, brown hair.",     ph:"brown·hair"},
+          {en:"dark / black hair",   cs:"tmavé / černé vlasy",emoji:"🖤", ex:"My dad has got dark hair.",         ph:"dark / blak·hair"},
+          {en:"grey hair",           cs:"šedivé vlasy",       emoji:"⚪", ex:"My grandfather has got grey hair.", ph:"gray·hair"},
+          {en:"red hair",            cs:"zrzavé vlasy",       emoji:"🔴", ex:"Who has got red hair?",             ph:"red·hair"},
+          {en:"white hair",          cs:"bílé vlasy",         emoji:"🤍", ex:"She has got white hair.",           ph:"wyte·hair"},
+          // Hair length
+          {en:"long hair",           cs:"dlouhé vlasy",       emoji:"💇‍♀️", ex:"She has got long, blond hair.",     ph:"long·hair"},
+          {en:"short hair",          cs:"krátké vlasy",       emoji:"💇",  ex:"He has got short hair.",            ph:"short·hair"},
+          {en:"shoulder-length hair",cs:"vlasy na ramena (poloduohé)", emoji:"👱‍♀️", ex:"She has got shoulder-length hair.", ph:"SHOL·der-length·hair"},
+          // Hair type
+          {en:"curly hair",          cs:"kudrnaté vlasy",     emoji:"🌀", ex:"She has got long, curly hair.",     ph:"KUR·lee·hair"},
+          {en:"straight hair",       cs:"rovné vlasy",        emoji:"➡️", ex:"He has got straight, dark hair.",   ph:"strayt·hair"},
+          {en:"wavy hair",           cs:"vlnité vlasy",       emoji:"🌊", ex:"My mum has got wavy hair.",         ph:"WAY·vee·hair"},
+          // Details
+          {en:"a beard",             cs:"vous / knír",        emoji:"🧔", ex:"My dad has got a beard.",           ph:"a·beerd"},
+          {en:"glasses",             cs:"brýle",              emoji:"👓", ex:"He wears glasses.",                 ph:"GLAS·iz"},
+          {en:"a moustache",         cs:"knír",               emoji:"🥸", ex:"He has got a moustache.",           ph:"a·muh·STASH"},
+          {en:"a tattoo",            cs:"tetování",           emoji:"💪", ex:"She has got a tattoo.",             ph:"a·ta·TOO"},
+        ],
+        fill:[
+          {s:"She has got long, ___ hair.",                a:"curly",           h:"kudrnaté"},
+          {s:"He has got ___ eyes — really blue!",         a:"blue",            h:"modré"},
+          {s:"My dad has got a ___. He doesn't shave.",    a:"beard",           h:"vous"},
+          {s:"She wears ___. She can't see well.",         a:"glasses",         h:"brýle"},
+          {s:"His hair is ___. Not curly at all.",         a:"straight",        h:"rovné"},
+          {s:"Her hair is ___. Down to her shoulders.",   a:"shoulder-length", h:"na ramena"},
+          {s:"He has got a ___ and a moustache.",         a:"beard",           h:"vous"},
+          {s:"She has got short, ___ hair.",               a:"blond",           h:"blond"},
+        ]
+      },
+      {
+        id:3, icon:"⭐", title:"2D – Famous families", tag:"Describing people",
+        topic:"Physical appearance · pp.48–49 · workbook p.73",
+        color: 3,
+        grammar:{
+          title:"FIGURE / POSTAVA — from workbook p.73",
+          rows:[
+            {subject:"chubby / fat",      pos:"buclatý / tlusťoučký / tlustý",  neg:"", ex:""},
+            {subject:"medium-height",     pos:"střední výšky / středně velký",   neg:"", ex:""},
+            {subject:"slim",              pos:"štíhlý/á",                        neg:"", ex:""},
+            {subject:"short",             pos:"malý/á",                          neg:"", ex:""},
+            {subject:"tall",              pos:"vysoký/á",                        neg:"", ex:""},
+            {subject:"thin",              pos:"hubený/á / tenký",                neg:"", ex:""},
+          ]
+        },
+        // exact adjectives from workbook p.73 — 2D column
+        vocab:[
+          // Figure
+          {en:"chubby",        cs:"buclatý/á / tlusťoučký",    emoji:"🤗", ex:"He is a bit chubby.",        ph:"CHUB·ee"},
+          {en:"fat",           cs:"tlustý/á",                  emoji:"😅", ex:"He is quite fat.",           ph:"fat"},
+          {en:"medium-height", cs:"střední výšky",             emoji:"🧍", ex:"She is medium-height.",      ph:"MEE·dee·um·hyte"},
+          {en:"slim",          cs:"štíhlý/á",                  emoji:"🧍", ex:"They are both slim.",         ph:"slim"},
+          {en:"short",         cs:"malý/á (o výšce)",          emoji:"🧒", ex:"Mum is short and very thin.",  ph:"short"},
+          {en:"tall",          cs:"vysoký/á",                  emoji:"🏀", ex:"My dad is quite tall.",       ph:"tawl"},
+          {en:"thin",          cs:"hubený/á / tenký",          emoji:"🧍", ex:"She is short and very thin.",  ph:"thin"},
+          // Other adjectives from workbook p.73
+          {en:"a bit",         cs:"trochu / poněkud",          emoji:"🔅", ex:"He is a bit chubby.",         ph:"a·bit"},
+          {en:"beautiful",     cs:"krásná / hezká",            emoji:"😍", ex:"She is beautiful.",          ph:"BYOO·ti·ful"},
+          {en:"intelligent",   cs:"chytrý/á / inteligentní",   emoji:"🧠", ex:"She is the most intelligent.", ph:"in·TEL·i·jent"},
+          {en:"quite",         cs:"docela",                    emoji:"👌", ex:"She is quite tall.",          ph:"kwyte"},
+          {en:"the eldest of", cs:"nejstarší z",               emoji:"👴", ex:"He is the eldest of the family.", ph:"the·EL·dest·ov"},
+          {en:"the youngest of",cs:"nejmladší z",              emoji:"🧒", ex:"She is the youngest of four.",  ph:"the·YUNG·est·ov"},
+          // Phrases from 2D
+          {en:"in her opinion",cs:"dle jejího názoru",         emoji:"💬", ex:"She is beautiful, in her opinion.", ph:"in·her·uh·PIN·yun"},
+          {en:"bright",        cs:"zářivý/á / bystý/á",        emoji:"✨", ex:"She has got bright eyes.",    ph:"bryte"},
+          {en:"shy",           cs:"stydlivý/á",                emoji:"😳", ex:"She is quite shy.",           ph:"shy"},
+          {en:"soft",          cs:"hebký/á / měkký",           emoji:"🌸", ex:"She has got soft hair.",      ph:"soft"},
+          {en:"sweet",         cs:"milý/á / roztomilý/á / sladký", emoji:"🍬", ex:"She is very sweet.",      ph:"sweet"},
+          {en:"tímid",         cs:"nesmělý/á / bázlivý",       emoji:"🐭", ex:"She seems timid.",           ph:"TIM·id"},
+        ],
+        fill:[
+          {s:"She is ___ and slim. Not short at all.",          a:"tall",        h:"vysoká"},
+          {s:"He is ___ and quite fat. Not slim.",              a:"short",       h:"malý"},
+          {s:"She is the ___ of four. Only 13.",               a:"youngest",    h:"nejmladší"},
+          {s:"She is the most ___. She gets top grades.",      a:"intelligent", h:"inteligentní"},
+          {s:"He is a ___ chubby, not very slim.",             a:"bit",         h:"trochu"},
+          {s:"She is ___ height — not tall, not short.",       a:"medium",      h:"střední"},
+          {s:"She is ___. She doesn't like speaking in class.",a:"shy",         h:"stydlivá"},
+          {s:"He is ___. Much taller than his sister.",        a:"tall",        h:"vysoký"},
+        ]
+      },
+      {
+        id:4, icon:"📖", title:"Sarah's family", tag:"Reading + extra vocab",
+        topic:"Sarah's blog + other useful words · pp.50–51",
+        color: 4,
+        grammar: null,
+        vocab:[
+          {en:"bilingual",       cs:"dvojjazyčný/á",            emoji:"🗣️", ex:"I am bilingual — Czech and English.", ph:"by·LIN·gwul"},
+          {en:"hometown",        cs:"rodné město",              emoji:"🏠", ex:"Her hometown is a fantastic place.", ph:"HOME·town"},
+          {en:"American",        cs:"Američan/ka / americký",   emoji:"🇺🇸", ex:"My mum is American.",            ph:"uh·MER·uh·kun"},
+          {en:"Czech",           cs:"Čech / česky / český",     emoji:"🇨🇿", ex:"My dad is Czech.",               ph:"chek"},
+          {en:"fantastic",       cs:"fantastický/á",            emoji:"🌟", ex:"New York is a fantastic city.", ph:"fan·TAS·tik"},
+          {en:"both",            cs:"oba / obě",                emoji:"2️⃣", ex:"They are both slim.",            ph:"bohth"},
+          {en:"really",          cs:"opravdu / skutečně",       emoji:"💯", ex:"My grandparents are really fun.", ph:"REE·lee"},
+          {en:"sweetheart",      cs:"miláček",                  emoji:"❤️", ex:"Claire is the sweetheart of our family.", ph:"SWEET·hart"},
+          {en:"lovely",          cs:"roztomilý/á / krásný/á",   emoji:"🌸", ex:"She has got lovely brown eyes.",  ph:"LUV·lee"},
+          {en:"selfie",          cs:"selfie",                   emoji:"🤳", ex:"She sends me a selfie.",          ph:"SEL·fee"},
+          {en:"send",            cs:"poslat / posílat",         emoji:"📨", ex:"She sends me messages.",          ph:"send"},
+          {en:"look young",      cs:"vypadat mladě",            emoji:"😊", ex:"My parents look very young.",     ph:"look·yung"},
+          {en:"wear glasses",    cs:"nosit brýle",              emoji:"👓", ex:"Dad wears glasses.",              ph:"wair·GLAS·iz"},
+          {en:"quite tall",      cs:"celkem vysoký/á",          emoji:"📏", ex:"Dad is quite tall.",              ph:"kwyte·tawl"},
+          {en:"short red hair",  cs:"krátké zrzavé vlasy",      emoji:"🔴", ex:"She has got short red hair.",     ph:"short·red·hair"},
+          {en:"shoulder-length white hair", cs:"bílé vlasy na ramena", emoji:"🤍", ex:"She has got shoulder-length white hair.", ph:"SHOL·der-length·wyte·hair"},
+        ],
+        fill:[
+          {s:"I am ___. I can speak Czech and English.",     a:"bilingual", h:"dvojjazyčný/á"},
+          {s:"My dad ___ glasses and has got a beard.",      a:"wears",     h:"nosí"},
+          {s:"They ___ very young. They are 40 and 35.",     a:"look",      h:"vypadají"},
+          {s:"She has got short ___ hair. Like fire!",       a:"red",       h:"zrzavé"},
+          {s:"She ___ me a selfie every holiday.",           a:"sends",     h:"posílá"},
+          {s:"My grandparents are ___ fun!",                 a:"really",    h:"opravdu"},
+        ]
+      }
     ]
   }
 ];
 
+// ===== XP LEVEL SYSTEM =====
+const LEVELS = [
+  { min: 0,    label: 'Beginner',  icon: '🌱' },
+  { min: 100,  label: 'Explorer',  icon: '🔍' },
+  { min: 300,  label: 'Star',      icon: '⭐' },
+  { min: 700,  label: 'Champion',  icon: '🏆' },
+  { min: 1500, label: 'Legend',    icon: '🌟' },
+];
+function getLevel(pts){ return [...LEVELS].reverse().find(l=>pts>=l.min)||LEVELS[0]; }
+
+// ===== PER-LESSON STARS =====
+function getStars(unitId, lessonIdx){ return parseInt(localStorage.getItem(`stars_${unitId}_${lessonIdx}`)||0); }
+function starsHtml(n){ return '⭐'.repeat(n)+'☆'.repeat(3-n); }
+
 // ===== STATE =====
-let curLesson=null, curMode=null, curQ=0, score=0, questions=[], fcIdx=0, fcFlipped=false;
+const IS_CHROME = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+// Feature flags — set to true to re-enable
+const FEATURES = { pronunciation: false };
+let curLesson=null, curUnitId=null, curStarKey=null, curMode=null, curQ=0, score=0, questions=[], fcIdx=0, fcFlipped=false;
 let totalScore = parseInt(localStorage.getItem('totalScore')||0);
 let streak = parseInt(localStorage.getItem('streak')||0);
 
 function updateBadges(){
   document.getElementById('total-score').textContent = totalScore;
   document.getElementById('streak').textContent = streak;
+  const lv = getLevel(totalScore);
+  const lvEl = document.getElementById('level-badge');
+  if(lvEl) lvEl.textContent = lv.icon + ' ' + lv.label;
 }
 updateBadges();
 
@@ -715,15 +851,35 @@ function showScreen(name){
 }
 
 function renderHome(){
-  document.getElementById('lesson-grid').innerHTML = LESSONS.map(l=>`
-    <div class="lcard c${l.color}" onclick="selectLesson(${l.id})">
-      <div class="lcard-icon">${l.icon}</div>
-      <div class="lcard-title">${l.title}</div>
-      <div class="lcard-sub">${l.topic}</div>
-      <span class="lcard-count">${l.vocab.length} words</span>
-    </div>`).join('');
+  const container = document.getElementById('unit-list');
+  container.innerHTML = UNITS.map(unit => {
+    const lessonCards = unit.lessons.map((l, idx) => {
+      const stars = getStars(unit.id, idx);
+      const starClass = stars===3 ? 'mastered' : stars>0 ? 'started' : '';
+      return `<div class="lcard c${l.color!==undefined?l.color:unit.color%5} ${starClass}" onclick="selectLesson(${unit.id},${idx})">
+        <div class="lcard-icon">${l.icon}</div>
+        <div class="lcard-title">${l.title}</div>
+        <div class="lcard-sub">${l.topic}</div>
+        <div class="lcard-footer">
+          <span class="lcard-count">${l.vocab.length} words</span>
+          <span class="lcard-stars">${starsHtml(stars)}</span>
+        </div>
+      </div>`;
+    }).join('');
+    const doneCount = unit.lessons.filter((_,i)=>getStars(unit.id,i)>0).length;
+    return `<div class="unit-section">
+      <div class="unit-hdr c${unit.color}">
+        <span class="unit-hdr-icon">${unit.icon}</span>
+        <div class="unit-hdr-info">
+          <div class="unit-hdr-title">${unit.title}</div>
+          <div class="unit-hdr-sub">${doneCount} / ${unit.lessons.length} lessons started</div>
+        </div>
+      </div>
+      <div class="lesson-grid">${lessonCards}</div>
+    </div>`;
+  }).join('');
 
-  // install banner + voice status
+  // install banner + voice status (keep existing code but reference install-banner-wrap)
   const wrap = document.getElementById('install-banner-wrap');
   const dismissed = localStorage.getItem('install-dismissed');
   const voiceStatus = getVoiceStatus();
@@ -763,8 +919,11 @@ function showInstallHelp(){
   alert('How to install on MacBook:\n\n🟢 In Google Chrome:\nMenu (⋮) → Save and share → Create shortcut\nTick "Open as window" → Create!\n\n🔵 In Safari:\nFile → Add to Dock\n\nThe app will appear in your Dock like a real app! 🎉');
 }
 
-function selectLesson(id){
-  curLesson = LESSONS[id];
+function selectLesson(unitId, lessonIdx){
+  const unit = UNITS.find(u=>u.id===unitId);
+  curLesson = unit.lessons[lessonIdx];
+  curUnitId = unitId;
+  curStarKey = `stars_${unitId}_${lessonIdx}`;
   const colors = ['#ff6b6b','#4ecdc4','#a29bfe','#fd79a8','#f9ca24'];
   document.getElementById('lesson-hdr').innerHTML=`
     <div class="lesson-hdr-icon">${curLesson.icon}</div>
@@ -803,7 +962,7 @@ function buildQuiz(){
   questions = shuffle(curLesson.vocab).slice(0,Math.min(10,curLesson.vocab.length)).map(item=>{
     const others = curLesson.vocab.filter(v=>v.en!==item.en);
     const wrong = shuffle(others).slice(0,3).map(v=>v.cs);
-    return {question:item.en, answer:item.cs, choices:shuffle([item.cs,...wrong]), emoji:item.emoji, ex:item.ex};
+    return {question:item.en, answer:item.cs, choices:shuffle([item.cs,...wrong]), emoji:item.emoji, ex:item.ex, ph:item.ph};
   });
 }
 
@@ -844,11 +1003,16 @@ function renderFC(){
       <div class="fc" id="fc-card" onclick="flipFC()">
         <div class="fc-emoji">${w.emoji}</div>
         <div class="fc-en">${w.en} <button class="speak-btn" onclick="event.stopPropagation();speak('${esc(w.en)}')">🔊</button></div>
+        ${FEATURES.pronunciation && w.ph ? `<div class="fc-ph">[ ${w.ph} ]</div>` : ''}
         <div class="fc-cs" id="fc-cs" style="display:none">${w.cs}</div>
         ${w.ex?`<div class="fc-ex" id="fc-ex" style="display:none">"${w.ex}" <button class="speak-btn" onclick="event.stopPropagation();speak('${esc(w.ex)}')">🔊</button></div>`:''}
         <div class="fc-tip" id="fc-tip">👆 Tap to see Czech</div>
       </div>
     </div>
+    ${IS_CHROME && FEATURES.pronunciation ? `<div class="mic-section">
+      <button class="mic-btn" id="mic-btn" onclick="checkPronunciation('${esc(w.en)}')">🎤 Say it!</button>
+      <div id="mic-result" class="mic-result"></div>
+    </div>` : ''}
     <div class="fc-nav">
       <button class="fc-nav-btn" onclick="fcIdx=Math.max(0,fcIdx-1);fcFlipped=false;renderFC()">← Prev</button>
       <button class="fc-nav-btn" onclick="fcIdx++;fcFlipped=false;renderFC()">Next →</button>
@@ -875,6 +1039,7 @@ function renderQuiz(){
       <span class="prog-label">${curQ+1}/${questions.length}</span>
     </div>
     <div class="q-text">${q.emoji} ${q.question} <button class="speak-btn" onclick="speak('${esc(q.question)}')">🔊</button></div>
+    ${FEATURES.pronunciation && q.ph ? `<div class="q-ph">[ ${q.ph} ]</div>` : ''}
     <div class="q-hint">What does this mean in Czech?</div>
     <div class="choices">
       ${q.choices.map(c=>`<button class="choice-btn" onclick="checkQ(this,'${esc(c)}','${esc(q.answer)}','quiz')">${c}</button>`).join('')}
@@ -982,6 +1147,14 @@ function showResult(){
   showScreen('result');
   const total=questions.length;
   const pct=Math.round(score/total*100);
+
+  // Save best stars for this lesson
+  if(curStarKey){
+    const newStars = pct>=90?3:pct>=70?2:pct>=50?1:0;
+    const oldStars = parseInt(localStorage.getItem(curStarKey)||0);
+    if(newStars>oldStars) localStorage.setItem(curStarKey, newStars);
+  }
+
   document.getElementById('res-score').textContent=score+' / '+total;
   let stars='⭐', msg="Good try! Keep practising!", trophy='🎯';
   if(pct>=90){stars='⭐⭐⭐';msg='You are an English superstar! 🚀';trophy='🏆';confetti();}
@@ -1077,6 +1250,73 @@ function getVoiceStatus(){
   if(!englishVoice) loadEnglishVoice();
   if(englishVoice) return '🔊 Voice: ' + englishVoice.name;
   return '⚠️ No English voice found — check System Settings → Accessibility → Spoken Content';
+}
+
+// ===== PRONUNCIATION CHECK =====
+function checkPronunciation(targetEn) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('mic-btn');
+  const resultEl = document.getElementById('mic-result');
+  if(!SR){
+    resultEl.innerHTML = '<span style="color:var(--red)">⚠️ Not supported — use Chrome!</span>';
+    return;
+  }
+  const r = new SR();
+  r.lang = 'en-GB';
+  r.continuous = false;
+  r.interimResults = false;
+  r.maxAlternatives = 5;
+
+  btn.textContent = '🎤 Listening...';
+  btn.classList.add('listening');
+  btn.disabled = true;
+  resultEl.textContent = '';
+
+  r.onresult = function(e){
+    const transcripts = [];
+    for(let i=0;i<e.results[0].length;i++) transcripts.push(e.results[0][i].transcript.trim().toLowerCase());
+    const heard = transcripts[0];
+    if(pronunciationMatch(transcripts, targetEn)){
+      resultEl.innerHTML = '<span style="color:var(--green)">✅ Great pronunciation! 🌟</span>';
+      totalScore += 5;
+      localStorage.setItem('totalScore', totalScore);
+      updateBadges();
+    } else {
+      resultEl.innerHTML = `<span style="color:var(--red)">❌ Heard: "<em>${heard}</em>" — try again!</span>`;
+    }
+    btn.textContent = '🎤 Try again';
+    btn.classList.remove('listening');
+    btn.disabled = false;
+  };
+
+  r.onerror = function(e){
+    if(e.error==='no-speech') resultEl.innerHTML='<span style="color:var(--muted)">🔇 Nothing heard — speak louder!</span>';
+    else if(e.error==='not-allowed') resultEl.innerHTML='<span style="color:var(--red)">🚫 Mic blocked — click 🔒 in address bar to allow</span>';
+    else resultEl.innerHTML=`<span style="color:var(--muted)">⚠️ ${e.error}</span>`;
+    btn.textContent = '🎤 Say it!';
+    btn.classList.remove('listening');
+    btn.disabled = false;
+  };
+
+  r.onend = function(){
+    if(btn.disabled && btn.textContent==='🎤 Listening...'){
+      btn.textContent='🎤 Say it!';
+      btn.classList.remove('listening');
+      btn.disabled=false;
+    }
+  };
+
+  r.start();
+}
+
+function pronunciationMatch(transcripts, target){
+  const alts = target.toLowerCase().split(' / ').map(s=>s.trim().replace(/^(a |an |the )/,''));
+  return transcripts.some(heard=>{
+    const h = heard.replace(/^(a |an |the )/,'');
+    return alts.some(alt=>
+      h===alt || h.includes(alt) || (alt.includes(h) && h.length>=3)
+    );
+  });
 }
 
 // ===== INIT =====
