@@ -602,7 +602,7 @@ const UNITS = [
         vocab:[
           {en:"aunt",          cs:"teta",                          emoji:"👩",  ex:"This is my aunt.",           ph:"ant"},
           {en:"brother",       cs:"bratr",                         emoji:"🧑",  ex:"I haven't got a brother.",   ph:"BRO·ther"},
-          {en:"children",      cs:"děti",                          emoji:"👦👧", ex:"They have got one daughter.", ph:"CHIL·dren"},
+          {en:"children",      cs:"děti",                          emoji:"👦👧", ex:"They have got two children.", ph:"CHIL·dren"},
           {en:"cousin",        cs:"bratranec / sestřenice",         emoji:"🧒",  ex:"She is my cousin.",          ph:"KUZ·in"},
           {en:"daughter",      cs:"dcera",                         emoji:"👧",  ex:"They have got one daughter.", ph:"DAW·ter"},
           {en:"father / daddy",cs:"otec / táta",                   emoji:"👨",  ex:"He is my father.",           ph:"FA·ther / DA·dy"},
@@ -762,7 +762,7 @@ const UNITS = [
           {en:"shy",           cs:"stydlivý/á",                emoji:"😳", ex:"She is quite shy.",           ph:"shy"},
           {en:"soft",          cs:"hebký/á / měkký",           emoji:"🌸", ex:"She has got soft hair.",      ph:"soft"},
           {en:"sweet",         cs:"milý/á / roztomilý/á / sladký", emoji:"🍬", ex:"She is very sweet.",      ph:"sweet"},
-          {en:"tímid",         cs:"nesmělý/á / bázlivý",       emoji:"🐭", ex:"She seems timid.",           ph:"TIM·id"},
+          {en:"timid",          cs:"nesmělý/á / bázlivý",       emoji:"🐭", ex:"She seems timid.",           ph:"TIM·id"},
         ],
         fill:[
           {s:"She is ___ and slim. Not short at all.",          a:"tall",        h:"vysoká"},
@@ -910,13 +910,13 @@ const UNITS = [
         ],
         fill:[
           {s:"She ___ French at school. She studies German.",      a:"doesn't study", h:"nestuduje"},
-          {s:"They ___ go to school on ___.",                      a:"don't",         h:"nechodí"},
+          {s:"They ___ go to school on Saturday.",                  a:"don't",         h:"nechodí"},
           {s:"My favourite subject is ___. I love numbers.",       a:"maths",         h:"matematika"},
           {s:"We have ___ every Friday. We look at bugs!",         a:"biology",       h:"biologie"},
           {s:"I love ___! We sing and play instruments.",          a:"music",         h:"hudební výchova"},
           {s:"He ___ have chemistry on Monday.",                   a:"doesn't",       h:"nemá"},
           {s:"We have ___ today — two hours of the same lesson.",  a:"double period", h:"dvouhodinovka"},
-          {s:"PE is ___. We play football and run.",               a:"great",         h:"skvělé"},
+          {s:"My favourite subject is ___. We run and play football.", a:"PE",          h:"tělesná výchova"},
         ]
       },
       {
@@ -957,7 +957,7 @@ const UNITS = [
           {s:"It's twenty ___. = 12:40",                           a:"to one",       h:"do jedné"},
           {s:"It's a quarter ___. = 1:15",                         a:"past one",     h:"po jedné"},
           {s:"It's a quarter ___. = 8:45",                         a:"to nine",      h:"do devíti"},
-          {s:"I get up ___ the morning at seven ___.",             a:"in",           h:"ráno"},
+          {s:"I get up ___ the morning.",                          a:"in",           h:"ráno"},
           {s:"School starts at eight ___.",                        a:"o'clock",      h:"hodin"},
           {s:"It's ten ___ five. = 5:10",                         a:"past",         h:"po"},
           {s:"It's five ___. = 6:55",                              a:"to seven",     h:"do sedmé"},
@@ -1014,6 +1014,198 @@ const UNITS = [
           {s:"I play football ___ a week — just on Saturdays.",    a:"once",         h:"jednou"},
           {s:"He is ___ the theatre. He is an actor.",              a:"in",           h:"v"},
           {s:"Jean goes to ___. She is a university student.",      a:"college",      h:"univerzita"},
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "Unit 4 – Home Sweet Home",
+    icon: "🏠",
+    color: 3,
+    lessons: [
+      {
+        id:0, icon:"🏠", title:"4A – Welcome to my house!", tag:"Rooms of the house",
+        topic:"House vocabulary · pp.74–75 · workbook p.69",
+        color: 3,
+        grammar:{
+          title:"There is / There are",
+          rows:[
+            {subject:"There is a bathroom.",    pos:"Je tam koupelna.",    neg:"There isn't a garage.",    ex:"There is a backyard behind the house."},
+            {subject:"There are two bedrooms.", pos:"Jsou tam 2 ložnice.", neg:"There aren't four rooms.", ex:"There are four rooms downstairs."},
+          ]
+        },
+        vocab:[
+          {en:"apartment / flat",  cs:"byt",                      emoji:"🏢", ex:"I live in a flat.",                     ph:"A·part·ment / flat"},
+          {en:"backyard",          cs:"dvorek",                   emoji:"🌿", ex:"There is a backyard behind the house.", ph:"BAK·yard"},
+          {en:"balcony",           cs:"balkon",                   emoji:"🏗️", ex:"We have a balcony.",                    ph:"BAL·koh·nee"},
+          {en:"bathroom",          cs:"koupelna",                 emoji:"🛁", ex:"There are two bathrooms in our flat.",  ph:"BATH·room"},
+          {en:"bedroom",           cs:"ložnice",                  emoji:"🛏️", ex:"My bedroom is on the second floor.",   ph:"BED·room"},
+          {en:"cellar",            cs:"sklep",                    emoji:"🔦", ex:"We keep old things in the cellar.",    ph:"SEL·er"},
+          {en:"children's room",   cs:"dětský pokoj",             emoji:"🧸", ex:"The children's room is upstairs.",     ph:"CHIL·drens·room"},
+          {en:"dining room",       cs:"jídelna",                  emoji:"🍽️", ex:"We eat in the dining room.",           ph:"DY·ning·room"},
+          {en:"downstairs",        cs:"dole / v přízemí",         emoji:"⬇️", ex:"The kitchen is downstairs.",           ph:"down·STAIRZ"},
+          {en:"first floor",       cs:"první patro",              emoji:"🔢", ex:"My parents' bedroom is on the first floor.", ph:"first·floor"},
+          {en:"garage",            cs:"garáž",                    emoji:"🚗", ex:"Our car is in the garage.",            ph:"guh·RAHJ"},
+          {en:"garden",            cs:"zahrada",                  emoji:"🌻", ex:"We have a big garden.",                ph:"GAR·den"},
+          {en:"ground floor",      cs:"přízemí",                  emoji:"🔢", ex:"The kitchen is on the ground floor.",  ph:"grownd·floor"},
+          {en:"hall",              cs:"chodba",                   emoji:"🚪", ex:"Leave your shoes in the hall.",        ph:"hawl"},
+          {en:"kitchen",           cs:"kuchyně",                  emoji:"🍳", ex:"The kitchen is between the living room and dad's study.", ph:"KICH·en"},
+          {en:"living room",       cs:"obývací pokoj",            emoji:"🛋️", ex:"We watch TV in the living room.",      ph:"LIV·ing·room"},
+          {en:"playroom",          cs:"herna / pokoj na hraní",   emoji:"🎮", ex:"The kids play in the playroom.",       ph:"PLAY·room"},
+          {en:"stairs",            cs:"schody",                   emoji:"🪜", ex:"My room is at the top of the stairs.", ph:"stairz"},
+          {en:"study",             cs:"pracovna",                 emoji:"📚", ex:"The study is upstairs.",               ph:"STUD·ee"},
+          {en:"terrace",           cs:"terasa",                   emoji:"☀️", ex:"We have breakfast on the terrace.",   ph:"TER·us"},
+          {en:"toilet",            cs:"toaleta / záchod",         emoji:"🚽", ex:"The toilet is next to the bathroom.", ph:"TOY·let"},
+          {en:"upstairs",          cs:"v prvním patře / nahoře",  emoji:"⬆️", ex:"The study is upstairs.",              ph:"up·STAIRZ"},
+        ],
+        fill:[
+          {s:"In American English we say apartment. In British English we say ___.",          a:"flat",       h:"byt"},
+          {s:"There is a ___ behind the house. We play there.",                              a:"backyard",   h:"dvorek"},
+          {s:"The kitchen is on the ___ floor. You don't need stairs.",                      a:"ground",     h:"přízemí"},
+          {s:"My room is ___. You need to go up the stairs.",                                a:"upstairs",   h:"nahoře"},
+          {s:"We eat together in the ___ room.",                                             a:"dining",     h:"jídelna"},
+          {s:"Dad works in his ___. It's very quiet there.",                                 a:"study",      h:"pracovna"},
+          {s:"There ___ four rooms downstairs.",                                             a:"are",        h:"jsou"},
+          {s:"The car is in the ___.",                                                       a:"garage",     h:"garáž"},
+        ]
+      },
+      {
+        id:1, icon:"🛋️", title:"4B – This is my bedroom", tag:"Furniture + prepositions",
+        topic:"Furniture · prepositions of place · pp.76–77 · workbook p.70",
+        color: 4,
+        grammar:{
+          title:"Prepositions of place",
+          rows:[
+            {subject:"in / on / under",       pos:"v, na, pod",              neg:"", ex:"The toys are under the bed."},
+            {subject:"next to / behind",       pos:"vedle / za",              neg:"", ex:"The armchair is next to the sofa."},
+            {subject:"between / in front of",  pos:"mezi / před",             neg:"", ex:"The lamp is between the desk and the bed."},
+            {subject:"on the left / on the right / opposite", pos:"nalevo / napravo / naproti", neg:"", ex:"The mirror is on the right."},
+          ]
+        },
+        vocab:[
+          {en:"armchair",          cs:"křeslo",                   emoji:"🪑", ex:"The armchair is next to the sofa.",    ph:"ARM·chair"},
+          {en:"bathtub",           cs:"vana",                     emoji:"🛁", ex:"There is a bathtub in the bathroom.",  ph:"BATH·tub"},
+          {en:"bed",               cs:"postel",                   emoji:"🛏️", ex:"My toys are under the bed.",           ph:"bed"},
+          {en:"bedside table",     cs:"noční stolek",             emoji:"🕯️", ex:"My lamp is on the bedside table.",    ph:"BED·syd·TAY·bul"},
+          {en:"bookshelf",         cs:"knihovna",                 emoji:"📚", ex:"The books are on the bookshelf.",     ph:"BOOK·shelf"},
+          {en:"carpet",            cs:"koberec",                  emoji:"🟫", ex:"There is a carpet in my room.",       ph:"KAR·pet"},
+          {en:"chair",             cs:"židle",                    emoji:"🪑", ex:"Sit on the chair, please.",           ph:"chair"},
+          {en:"chest of drawers",  cs:"komoda",                   emoji:"🗄️", ex:"My clothes are in the chest of drawers.", ph:"chest·uv·DRAW·erz"},
+          {en:"couch",             cs:"gauč / sedačka",           emoji:"🛋️", ex:"The couch is comfortable.",           ph:"kowch"},
+          {en:"cupboard",          cs:"kredenc",                  emoji:"🗄️", ex:"The plates are in the cupboard.",     ph:"KUB·erd"},
+          {en:"desk",              cs:"psací stůl",               emoji:"🖥️", ex:"I do homework at my desk.",           ph:"desk"},
+          {en:"fireplace",         cs:"krb",                      emoji:"🔥", ex:"The fireplace is new.",               ph:"FYR·plays"},
+          {en:"fridge",            cs:"lednice",                  emoji:"🧊", ex:"The fridge is in the kitchen.",       ph:"frij"},
+          {en:"lamp",              cs:"lampa",                    emoji:"💡", ex:"The lamp is on the desk.",            ph:"lamp"},
+          {en:"mirror",            cs:"zrcadlo",                  emoji:"🪞", ex:"The mirror is on the wall.",          ph:"MIR·er"},
+          {en:"rug",               cs:"koberec (malý)",           emoji:"🟫", ex:"There is a rug on the floor.",        ph:"rug"},
+          {en:"shelf",             cs:"police",                   emoji:"📦", ex:"The shelf is on the wall.",           ph:"shelf"},
+          {en:"shower",            cs:"sprcha",                   emoji:"🚿", ex:"There is a shower on the right.",     ph:"SHOW·er"},
+          {en:"sink",              cs:"dřez",                     emoji:"🚰", ex:"The sink is in the kitchen.",         ph:"sink"},
+          {en:"sofa",              cs:"sedačka / pohovka",        emoji:"🛋️", ex:"The sofa is in the middle of the room.", ph:"SOH·fah"},
+          {en:"wardrobe",          cs:"skříň (šatní)",            emoji:"👗", ex:"My clothes are in the wardrobe.",     ph:"WOR·drohb"},
+          {en:"(wash) basin",      cs:"umyvadlo",                 emoji:"🚰", ex:"There is a basin on the left.",       ph:"BAY·sin"},
+        ],
+        fill:[
+          {s:"The armchair is ___ to the sofa.",                   a:"next",         h:"vedle"},
+          {s:"My toys are ___ the bed.",                           a:"under",        h:"pod"},
+          {s:"The fridge is ___ the kitchen.",                     a:"in",           h:"v"},
+          {s:"The lamp is ___ the desk.",                          a:"on",           h:"na"},
+          {s:"The sofa is in the ___ of the room.",                a:"middle",       h:"uprostřed"},
+          {s:"The mirror is ___ the right.",                       a:"on",           h:"napravo"},
+          {s:"I keep my clothes in the ___.",                      a:"wardrobe",     h:"šatní skříň"},
+          {s:"I do my homework at my ___.",                        a:"desk",         h:"psací stůl"},
+        ]
+      },
+      {
+        id:2, icon:"✨", title:"4C – My favourite room", tag:"Room adjectives + pronouns",
+        topic:"Describing rooms · object pronouns · pp.78–79 · workbook p.70",
+        color: 0,
+        grammar:{
+          title:"Object pronouns",
+          rows:[
+            {subject:"I → me",       pos:"me",   neg:"Give me the book.",       ex:""},
+            {subject:"you → you",    pos:"you",  neg:"I can see you.",           ex:""},
+            {subject:"he → him",     pos:"him",  neg:"I work with him.",         ex:""},
+            {subject:"she → her",    pos:"her",  neg:"Mum helps her.",           ex:""},
+            {subject:"it → it",      pos:"it",   neg:"I like it very much.",     ex:""},
+            {subject:"we → us",      pos:"us",   neg:"Mum brings us food.",      ex:""},
+            {subject:"they → them",  pos:"them", neg:"My friends come to see them.", ex:""},
+          ]
+        },
+        vocab:[
+          {en:"airy",              cs:"vzdušný",                  emoji:"💨", ex:"The living room is airy.",            ph:"AIR·ee"},
+          {en:"beautiful",         cs:"krásný",                   emoji:"😍", ex:"It's a beautiful house!",             ph:"BYOO·ti·ful"},
+          {en:"clean",             cs:"čistý",                    emoji:"✨", ex:"My room is clean and tidy.",          ph:"kleen"},
+          {en:"comfortable",       cs:"pohodlný",                 emoji:"😌", ex:"The new sofa is comfortable.",        ph:"KUM·fer·tuh·bul"},
+          {en:"cool",              cs:"bezva / skvělý",           emoji:"😎", ex:"Our kitchen is really cool.",         ph:"kool"},
+          {en:"cosy",              cs:"útulný",                   emoji:"🏡", ex:"Our room is really cosy.",            ph:"KOH·zee"},
+          {en:"large",             cs:"velký",                    emoji:"⬆️", ex:"The windows are huge and large.",     ph:"larj"},
+          {en:"modern",            cs:"moderní",                  emoji:"🆕", ex:"It's a cosy, modern apartment.",      ph:"MOD·ern"},
+          {en:"nice",              cs:"hezký",                    emoji:"😊", ex:"It's a nice and pleasant place.",     ph:"nys"},
+          {en:"pleasant",          cs:"příjemný",                 emoji:"🌸", ex:"It's a nice and pleasant place.",     ph:"PLEZ·ent"},
+          {en:"quiet",             cs:"klidný",                   emoji:"🤫", ex:"The village is quiet.",               ph:"KWY·et"},
+          {en:"small",             cs:"malý",                     emoji:"⬇️", ex:"My family is small but comfortable.", ph:"smawl"},
+          {en:"spacious",          cs:"prostorný",                emoji:"🏛️", ex:"My bedroom is spacious.",             ph:"SPAY·shus"},
+          {en:"well-furnished",    cs:"dobře vybavený / zařízený",emoji:"🛋️", ex:"The flat is well-furnished.",         ph:"wel·FUR·nisht"},
+        ],
+        fill:[
+          {s:"My room is very ___. It has lots of space.",          a:"spacious",     h:"prostorný"},
+          {s:"The flat is ___. It has everything you need.",        a:"well-furnished", h:"dobře zařízený"},
+          {s:"This is a ___ room. It's not big at all.",            a:"small",        h:"malý"},
+          {s:"The sofa is really ___. I love sitting here!",        a:"comfortable",  h:"pohodlný"},
+          {s:"Our apartment is ___. It's in LA near the beach.",    a:"modern",       h:"moderní"},
+          {s:"Give ___ the book, please. (= me)",                   a:"me",           h:"mně"},
+          {s:"Can you help ___? (= her)",                           a:"her",          h:"jí"},
+          {s:"I like ___ very much. (= it)",                        a:"it",           h:"to"},
+        ]
+      },
+      {
+        id:3, icon:"🧹", title:"4D – Tidy up!", tag:"Chores + have to / must",
+        topic:"Chores · have to · must · mustn't · pp.80–81 · workbook p.71",
+        color: 1,
+        grammar:{
+          title:"have to / must / mustn't",
+          rows:[
+            {subject:"I / you / we / they",  pos:"have to tidy up",    neg:"don't have to tidy up",  ex:"I have to take out the trash."},
+            {subject:"He / she / it",         pos:"has to tidy up",     neg:"doesn't have to tidy up", ex:"She has to feed the dog."},
+            {subject:"I / we / he / she",     pos:"must tidy up",       neg:"mustn't tidy up",        ex:"You mustn't eat in bed."},
+            {subject:"must = povinnost",      pos:"mustn't = zákaz",    neg:"don't have to = není nutné", ex:""},
+          ]
+        },
+        vocab:[
+          {en:"to do the cooking / cook",  cs:"vařit",                  emoji:"🍳", ex:"I don't have to cook.",              ph:"to·do·the·KUK·ing"},
+          {en:"to do the gardening",       cs:"pracovat na zahradě",    emoji:"🌿", ex:"Dad does the gardening.",            ph:"to·do·the·GAR·den·ing"},
+          {en:"to do the ironing",         cs:"žehlit",                 emoji:"👔", ex:"I have to do the ironing.",          ph:"to·do·the·EYE·er·ning"},
+          {en:"to do the laundry",         cs:"prát prádlo",            emoji:"🧺", ex:"Mum does the laundry.",              ph:"to·do·the·LAWN·dree"},
+          {en:"to feed the dog",           cs:"krmit psa",              emoji:"🐕", ex:"I have to feed the dog.",            ph:"to·feed·the·dog"},
+          {en:"to make a mess",            cs:"dělat nepořádek",        emoji:"😅", ex:"Don't make a mess!",                 ph:"to·mayk·a·mes"},
+          {en:"to set the table",          cs:"prostřít stůl",          emoji:"🍽️", ex:"Can you set the table, please?",     ph:"to·set·the·TAY·bul"},
+          {en:"to sweep the floor",        cs:"zametat podlahu",        emoji:"🧹", ex:"I must sweep the floor.",            ph:"to·sweep·the·floor"},
+          {en:"to take out the trash",     cs:"vynést koš",             emoji:"🗑️", ex:"I have to take out the trash.",      ph:"to·tayk·owt·the·trash"},
+          {en:"to tell lies",              cs:"lhát",                   emoji:"🤥", ex:"You mustn't tell lies.",             ph:"to·tel·lyz"},
+          {en:"to throw trash on the floor",cs:"házet odpadky na zem", emoji:"🚯", ex:"You mustn't throw trash on the floor.", ph:"to·throh·trash"},
+          {en:"to tidy my room",           cs:"uklidit si svůj pokoj",  emoji:"🧹", ex:"I have to tidy my room.",            ph:"to·TY·dee·my·room"},
+          {en:"to wash the dishes",        cs:"umývat nádobí",          emoji:"🍽️", ex:"She doesn't have to wash the dishes.", ph:"to·wosh·the·DISH·ez"},
+          {en:"to water the plants",       cs:"zalévat květiny",        emoji:"🌱", ex:"I have to water the plants.",        ph:"to·WAW·ter·the·plants"},
+          {en:"to eat in bed",             cs:"jíst v posteli",         emoji:"🛏️", ex:"You mustn't eat in bed.",            ph:"to·eet·in·bed"},
+          {en:"to say bad words",          cs:"říkat sprostá slova",    emoji:"🤬", ex:"You mustn't say bad words.",         ph:"to·say·bad·wurdz"},
+          {en:"church",                    cs:"kostel",                 emoji:"⛪", ex:"The church is in front of the shop.", ph:"church"},
+          {en:"post office",               cs:"pošta",                  emoji:"📮", ex:"The post office is behind the church.", ph:"pohst·OF·is"},
+          {en:"shop",                      cs:"obchod",                 emoji:"🏪", ex:"There is a shop in the village.",    ph:"shop"},
+          {en:"view",                      cs:"výhled",                 emoji:"🌅", ex:"They have a view of the park.",      ph:"vyoo"},
+          {en:"village",                   cs:"vesnice",                emoji:"🏘️", ex:"I live in a small village.",         ph:"VIL·ij"},
+        ],
+        fill:[
+          {s:"I ___ take out the trash. It's my job.",             a:"have to",      alt:["must"],           h:"musím"},
+          {s:"You ___ eat in bed. It's not allowed!",              a:"mustn't",                             h:"nesmíš"},
+          {s:"She ___ wash the dishes. Mum does it.",              a:"doesn't have to",                     h:"nemusí"},
+          {s:"I ___ sweep the floor every Saturday.",              a:"must",         alt:["have to"],        h:"musím"},
+          {s:"He ___ tell lies. It's wrong!",                      a:"mustn't",                             h:"nesmí"},
+          {s:"Can you ___ the table for dinner, please?",          a:"set",          h:"prostřít"},
+          {s:"I ___ water the plants or they will die.",           a:"have to",      h:"musím"},
+          {s:"They live in a small ___. There is one shop.",       a:"village",      h:"vesnice"},
         ]
       }
     ]
@@ -1326,15 +1518,17 @@ function renderFill(){
   inp.focus();
 }
 
+function normFill(s){ return s.trim().toLowerCase().replace(/\s+/g,' ').replace(/-/g,' '); }
 function checkFill(){
   const inp=document.getElementById('blank');
   if(!inp||inp.disabled)return;
-  const val=inp.value.trim().toLowerCase();
+  const val=normFill(inp.value);
   const q=questions[curQ];
   inp.disabled=true;
   document.getElementById('sbtn').disabled=true;
   const fb=document.getElementById('feedback');
-  if(val===q.a.toLowerCase()){
+  const accepted=[q.a,...(q.alt||[])].map(normFill);
+  if(accepted.includes(val)){
     inp.style.borderBottomColor='var(--green)';
     fb.textContent='✓ Correct! Well done! 🌟';
     fb.className='feedback ok';
@@ -1413,7 +1607,7 @@ function loadEnglishVoice(){
   }
 
   // Fall back: any en-GB voice
-  englishVoice = voices.find(v => v.lang === 'en-GB' && !v.localService === false)
+  englishVoice = voices.find(v => v.lang === 'en-GB' && v.localService)
     || voices.find(v => v.lang === 'en-GB')
     || voices.find(v => v.lang === 'en-US')
     || voices.find(v => v.lang.startsWith('en-'))
